@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АРТ КОНЦЕПТ | Архитектурное бюро</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    <!-- КАСТОМНЫЙ КУРСОР -->
+    <div class="custom-cursor" id="cursor">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Строгая, острая геометрия -->
+            <path d="M0 0 L15 5 L8 8 L5 15 Z" />
+        </svg>
+    </div>
+
+    <!-- 0. ПРЕЛОАДЕР (КЛАССИКА С ЗАНАВЕСОМ) -->
+    <div class="preloader">
+        <div class="preloader-logo-wrap">
+            <svg class="preloader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.6 265.7">
+                <path fill="#FFFFFF" d="M100,151.1c-.5-8.1-7.2-14.5-15.4-14.5v-2.4h107.8l20.8,60.9h28.7L175.4,3.6h-52.4L57.2,195.2h27.8l15-44.1ZM141.6,22.1h14.6c8.9,32.6,19.7,62.2,29.8,91.7h-74c9.9-29.5,20.9-59.1,29.5-91.7Z"/>
+                <path fill="#FFFFFF" d="M263.7,221.7v16.1H34.4v-16.1h-8v41.8h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1s229.3,0,229.3,0v19.1h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1v-22.7h-8Z"/>
+            </svg>
+        </div>
+    </div>
+
+<!-- 1. ШАПКА -->
+    <header class="header">
+        <nav class="header-nav">
+            <a href="portfolio.html">ПРОЕКТЫ</a>
+            <a href="services.html">УСЛУГИ</a>
+            <a href="studio.html">БЮРО</a>
+        </nav>
+        
+        <div class="header-logo-wrap">
+            <a href="index.html">
+                <svg class="header-monogram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.6 265.7">
+                    <path fill="#FFFFFF" d="M100,151.1c-.5-8.1-7.2-14.5-15.4-14.5v-2.4h107.8l20.8,60.9h28.7L175.4,3.6h-52.4L57.2,195.2h27.8l15-44.1ZM141.6,22.1h14.6c8.9,32.6,19.7,62.2,29.8,91.7h-74c9.9-29.5,20.9-59.1,29.5-91.7Z"/>
+                    <path fill="#FFFFFF" d="M263.7,221.7v16.1H34.4v-16.1h-8v41.8h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1s229.3,0,229.3,0v19.1h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1v-22.7h-8Z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="header-action">
+            <a href="contacts.html" class="contact-link">СВЯЗАТЬСЯ</a>
+        </div>
+    </header>
+
+    <!-- 2. ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <div class="hero-media-wrapper">
+            <img class="hero-image" src="hero-bg.jpg" alt="Интерьер">
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-brand-center">
+            <svg id="hero-main-logo" class="hero-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 726 73.3">
+                <g id="line-group">
+                    <rect fill="#FFFFFF" x="180.5" y="33.9" width="163.3" height="3.9"/>
+                    <path fill="#FFFFFF" d="M180.4,41.6c-.1-1.8-1.6-3.3-3.5-3.3v-.5h3.5v-13.2h-4.7v24.3h4.7v-7.2h0Z"/>
+                    <path fill="#FFFFFF" d="M343.7,41.6c-.1-1.8-1.6-3.3-3.5-3.3v-.5h3.5v-13.2h-4.7v24.3h4.7v-7.2h0Z"/>
+                </g>
+                <g id="art-word">
+                    <path fill="#FFFFFF" d="M38.4,9.3h-14.1L6.5,61h7.5l4.1-11.9c-.1-2.2-1.9-3.9-4.2-3.9v-.6h29.1l5.6,16.4h7.7L38.4,9.3ZM21.3,39c2.7-8,5.6-15.9,8-24.7h3.9c2.4,8.8,5.3,16.8,8,24.7h-20Z"/>
+                    <path fill="#FFFFFF" d="M109.6,9.3v5.9h18.6v45.8h7.3V19.8h0c-.1-2.2-1.9-3.9-4.2-3.9v-.6h4.2s18.6,0,18.6,0v-5.9h-44.6Z"/>
+                    <path fill="#FFFFFF" d="M104.1,21.7h0c-.6-7.8-7.1-12.4-18.8-12.4h-21.6v51.7h7.4v-16.4h0c-.1-2.2-1.9-4.9-4.2-4.9v-.8s18.5,0,18.5,0c12.3,0,18.8-5.1,18.8-13.7s0-2.6,0-3.4ZM71.2,15.2h13.2c10.2.2,12.2,3.6,12.4,9.4-.2,5.8-4,8.4-12.4,8.4h-13.2V15.2Z"/>
+                </g>
+                <g id="concept-word">
+                    <path fill="#FFFFFF" d="M668.2,9v5.9h18.7v45.9h7.4V19.5h0c-.1-2.2-1.9-4-4.2-4v-.6h4.2s18.7,0,18.7,0v-5.9h-44.7Z"/>
+                    <path fill="#FFFFFF" d="M408.6,36.2v-2.6c0-14.3,8.5-25.5,25.1-25.5s25.2,11.2,25.2,25.5v2.6c0,14.3-8.5,25.6-25.2,25.6s-25.1-11.2-25.1-25.6ZM433.8,55.9c11,0,18.1-7.7,18.1-19.7v-2.5c0-12.1-7.1-19.7-18.1-19.7s-18,7.7-18,19.7v2.5c0,12.1,6.9,19.7,18,19.7Z"/>
+                    <path fill="#FFFFFF" d="M560.8,60.8h-41.3V9.2h7.2v45.7h28.5V9.2h7.2v45.8h5.3v15.6h-6.9v-9.8Z"/>
+                    <path fill="#FFFFFF" d="M385,33.7l20.9-24.5h-8.2l-19.1,22.5h-4.3V9.2h-7.2v51.5h7.2v-18.6c-.1-1.3-.8-3.8-4.2-3.8v-.6h5.9s3.8,0,3.8,0l18.3,23.1h8.7l-21.8-26.9Z"/>
+                    <path fill="#FFFFFF" d="M581.6,54.9v-13.6c0-1.3-.6-4-4.2-4v-.6h4.2s28,0,28,0v-5.9h-28v-15.7h29v-5.9h-36.2v51.6h37.1v-5.9h-29.9Z"/>
+                    <path fill="#FFFFFF" d="M618.2,9.2v51.6h7.2V19.7c0-1.3-.7-3.9-4.2-3.9v-.6h5.9s26.7,0,26.7,0v45.7h7.2V9.2h-42.9Z"/>
+                    <path fill="#FFFFFF" d="M502.6,8.9v21.6s-28.5,0-28.5,0V8.9h-7.2v51.7h7.2v-19.7c0-1.3-.7-3.9-4.2-3.9v-.6h4.2s28.5,0,28.5,0v24.2s7.2,0,7.2,0V8.9h-7.2Z"/>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 3. ФИЛОСОФИЯ -->
+    <section class="editorial-flow-section" id="statement">
+        <div class="editorial-sticky-overlay">
+            <div class="phrase-container phrase-1">
+                <span class="statement-row">ОБЪЕДИНЯЕМ КАЧЕСТВО, ДЕТАЛИ, СЕРВИС</span>
+                <span class="statement-row">И РЕЗУЛЬТАТ В КАЖДОМ ПРОЕКТЕ</span>
+            </div>
+            <div class="phrase-container phrase-2">
+                <span class="statement-row">ГАРАНТИРУЕМ ПРОЗРАЧНОСТЬ ВСЕХ ЭТАПОВ,</span>
+                <span class="statement-row">СОБЛЮДЕНИЕ БЮДЖЕТА И КАЧЕСТВО НА 5 ЛЕТ</span>
+            </div>
+            <div class="phrase-container phrase-3">
+                <span class="statement-row">РЕАЛИЗУЕМ ВАШ ИНТЕРЬЕР ОТ ЗАМЕРА</span>
+                <span class="statement-row">ДО ЧАШКИ КОФЕ ПОД КЛЮЧ ЗА 8–12 МЕСЯЦЕВ</span>
+            </div>
+        </div>
+
+        <div class="editorial-images-scatter">
+            <div class="scatter-item item-1" data-speed="-40vh"><img src="thumb-1.jpg" alt="Интерьер 1"></div>
+            <div class="scatter-item item-2" data-speed="40vh"><img src="thumb-2.jpg" alt="Интерьер 2"></div>
+            <div class="scatter-item item-3" data-speed="-50vh"><img src="thumb-3.jpg" alt="Интерьер 3"></div>
+            <div class="scatter-item item-4" data-speed="60vh"><img src="thumb-4.jpg" alt="Интерьер 4"></div>
+            <div class="scatter-item item-5" data-speed="-120vh"><img src="thumb-5.jpg" alt="Интерьер 5"></div>
+        </div>
+    </section>
+
+    <!-- 4. ПРОЕКТЫ: ТРЕХЧАСТНАЯ КОМПОЗИЦИЯ ELICYON -->
+    <section class="projects-wide" id="projects">
+        <div class="projects-grid-layout">
+            
+            <!-- Левая колонка (прижата к верху) -->
+            <div class="projects-col-left fade-up">
+                <h2 class="projects-title">
+                    <span class="title-line-1">НАШИ</span>
+                    <span class="title-line-2">ПРОЕКТЫ</span>
+                </h2>
+               <p class="projects-desc">Мы создаем только самые продуманные и&nbsp;визионерские интерьеры, охватывая жилые, инвестиционные и&nbsp;коммерческие пространства.</p>
+            </div>
+            
+            <!-- Центральная колонка: 3 ступенчатых прямоугольника -->
+            <div class="projects-visuals-center fade-up">
+                <a href="portfolio.html" class="proj-card card-1">
+                    <img src="project-1.jpg" alt="Жилые">
+                    <div class="proj-overlay"></div>
+                    <span class="proj-label">ЖИЛЫЕ</span>
+                </a>
+                <a href="portfolio.html" class="proj-card card-2">
+                    <img src="project-2.jpg" alt="Инвестиционные">
+                    <div class="proj-overlay"></div>
+                    <span class="proj-label">ИНВЕСТИЦИОННЫЕ</span>
+                </a>
+                <a href="portfolio.html" class="proj-card card-3">
+                    <img src="project-3.jpg" alt="Коммерческие">
+                    <div class="proj-overlay"></div>
+                    <span class="proj-label">КОММЕРЧЕСКИЕ</span>
+                </a>
+            </div>
+
+            <!-- Правая колонка (прижата к низу) -->
+            <div class="projects-col-right fade-up">
+                <p class="projects-desc">Каждый объект определяется не&nbsp;мимолетным трендом, а&nbsp;выверенной эстетикой, контекстом и&nbsp;бескомпромиссным качеством.</p>
+                <a href="portfolio.html" class="projects-link-underline">СМОТРЕТЬ ВСЕ ПРОЕКТЫ</a>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ТИЗЕР УСЛУГ (Сплит 50/50) -->
+    <section class="split-teaser" id="services">
+        <div class="split-image-col">
+            <img src="teaser-services-big.jpg" alt="Дизайн интерьера">
+            
+            <!-- Плашка для первой секции -->
+            <a href="portfolio.html" class="split-caption">
+                <span class="caption-label">ПРОЕКТ</span>
+                <span class="caption-value">АПАРТАМЕНТЫ В СИТИ <span class="caption-arrow">&rarr;</span></span>
+            </a>
+        </div>
+        <div class="split-text-col">
+            <h2 class="split-title">ДИЗАЙН ИНТЕРЬЕРА</h2>
+            <div class="split-mini-img">
+                <img src="teaser-services-mini.jpg" alt="Деталь интерьера">
+            </div>
+            <p class="split-desc">Мы&nbsp;создаем интерьеры, которые рассказывают историю каждого клиента. Выверенная эстетика, функциональные планировки и&nbsp;бескомпромиссное внимание к&nbsp;каждой детали.</p>
+            <a href="services.html" class="projects-link-underline">ВСЕ УСЛУГИ</a>
+        </div>
+    </section>
+
+    <!-- ТИЗЕР БЮРО (Реверс 50/50) -->
+    <section class="split-teaser reverse" id="studio">
+        <div class="split-image-col">
+            <img src="teaser-studio.jpg" alt="Алёна Волкова">
+            
+            <!-- Плашка для второй секции -->
+            <a href="portfolio.html" class="split-caption">
+                <span class="caption-label">ПРОЕКТ</span>
+                <span class="caption-value">РЕЗИДЕНЦИЯ В МОСКВЕ <span class="caption-arrow">&rarr;</span></span>
+            </a>
+        </div>
+        <div class="split-text-col">
+            <h2 class="split-title">О&nbsp;БЮРО</h2>
+            <div class="split-mini-img">
+                <img src="teaser-studio-mini.jpg" alt="Алёна Чмелёва">
+            </div>
+            <p class="split-desc">Основатель дизайн-бюро ART&nbsp;Concept Алёна Чмелёва объединяет 17-летний опыт с&nbsp;передовым видением дизайна. Проекты бюро регулярно побеждают в&nbsp;международных премиях и&nbsp;публикуются в&nbsp;ведущих изданиях.</p>
+            <a href="studio.html" class="projects-link-underline">ПОДРОБНЕЕ О&nbsp;БЮРО</a>
+        </div>
+    </section>
+
+   <!-- 8. СИНИЙ ИНТЕРАКТИВНЫЙ ФУТЕР -->
+    <footer class="footer-cinematic" id="footer">
+        <div class="footer-grid">
+            
+            <!-- Колонка 1: Форма заявки -->
+            <div class="footer-form-col">
+                <h2 class="footer-newsletter-title">ОБСУДИТЬ ПРОЕКТ</h2>
+                <p class="footer-newsletter-desc">Оставьте свои пожелания о вашем пространстве, а остальное сделаем мы.</p>
+
+                <form class="footer-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" placeholder="ВАШЕ ИМЯ *">
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА *">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" placeholder="EMAIL">
+                    </div>
+
+                    <label class="custom-checkbox-wrap">
+                        <input type="checkbox" required>
+                        <span class="checkbox-box"></span>
+                        <span class="checkbox-label">Согласие с политикой обработки персональных данных</span>
+                    </label>
+
+                    <button type="submit" class="projects-link-underline footer-submit-btn">ОБСУДИТЬ ПРОЕКТ</button>
+                </form>
+            </div>
+
+            <!-- Колонка 2: Навигация -->
+            <div class="footer-nav-col">
+                <div class="footer-links-group">
+                    <a href="portfolio.html">ПРОЕКТЫ</a>
+                    <a href="studio.html">БЮРО</a>
+                    <a href="services.html">УСЛУГИ</a>
+                    <a href="#statement">ФИЛОСОФИЯ</a>
+                </div>
+                <!-- Обновленные соцсети -->
+                <div class="footer-links-group">
+                    <a href="https://t.me" target="_blank">TELEGRAM</a>
+                    <a href="https://youtube.com" target="_blank">YOUTUBE</a>
+                    <a href="https://dzen.ru" target="_blank">ЯНДЕКС ДЗЕН</a>
+                    <a href="https://instagram.com" target="_blank">INSTAGRAM</a>
+                </div>
+            </div>
+
+            <!-- Колонка 3: Контакты (Без ИП) -->
+            <div class="footer-contacts-col">
+                <a href="tel:+79032986381" class="footer-contact-link">+7 903 298 63 81</a>
+                <a href="mailto:info@ac-interiors.ru" class="footer-contact-link">info@ac-interiors.ru</a>
+                
+                <p class="footer-address">
+                    г. Москва, Большой Саввинский<br>
+                    пер. 12, стр. 8 «Московский шёлк»<br>
+                    (внутри шоу-рума Decorum)
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ОГРОМНЫЙ ЛОГОТИП С ПАЛКОЙ -->
+        <div class="footer-huge-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 726 73.3">
+                <g id="line-group">
+                    <rect fill="#FFFFFF" x="180.5" y="33.9" width="163.3" height="3.9"/>
+                    <path fill="#FFFFFF" d="M180.4,41.6c-.1-1.8-1.6-3.3-3.5-3.3v-.5h3.5v-13.2h-4.7v24.3h4.7v-7.2h0Z"/>
+                    <path fill="#FFFFFF" d="M343.7,41.6c-.1-1.8-1.6-3.3-3.5-3.3v-.5h3.5v-13.2h-4.7v24.3h4.7v-7.2h0Z"/>
+                </g>
+                <g id="art-word">
+                    <path fill="#FFFFFF" d="M38.4,9.3h-14.1L6.5,61h7.5l4.1-11.9c-.1-2.2-1.9-3.9-4.2-3.9v-.6h29.1l5.6,16.4h7.7L38.4,9.3ZM21.3,39c2.7-8,5.6-15.9,8-24.7h3.9c2.4,8.8,5.3,16.8,8,24.7h-20Z"/>
+                    <path fill="#FFFFFF" d="M109.6,9.3v5.9h18.6v45.8h7.3V19.8h0c-.1-2.2-1.9-3.9-4.2-3.9v-.6h4.2s18.6,0,18.6,0v-5.9h-44.6Z"/>
+                    <path fill="#FFFFFF" d="M104.1,21.7h0c-.6-7.8-7.1-12.4-18.8-12.4h-21.6v51.7h7.4v-16.4h0c-.1-2.2-1.9-4.9-4.2-4.9v-.8s18.5,0,18.5,0c12.3,0,18.8-5.1,18.8-13.7s0-2.6,0-3.4ZM71.2,15.2h13.2c10.2.2,12.2,3.6,12.4,9.4-.2,5.8-4,8.4-12.4,8.4h-13.2V15.2Z"/>
+                </g>
+                <g id="concept-word">
+                    <path fill="#FFFFFF" d="M668.2,9v5.9h18.7v45.9h7.4V19.5h0c-.1-2.2-1.9-4-4.2-4v-.6h4.2s18.7,0,18.7,0v-5.9h-44.7Z"/>
+                    <path fill="#FFFFFF" d="M408.6,36.2v-2.6c0-14.3,8.5-25.5,25.1-25.5s25.2,11.2,25.2,25.5v2.6c0,14.3-8.5,25.6-25.2,25.6s-25.1-11.2-25.1-25.6ZM433.8,55.9c11,0,18.1-7.7,18.1-19.7v-2.5c0-12.1-7.1-19.7-18.1-19.7s-18,7.7-18,19.7v2.5c0,12.1,6.9,19.7,18,19.7Z"/>
+                    <path fill="#FFFFFF" d="M560.8,60.8h-41.3V9.2h7.2v45.7h28.5V9.2h7.2v45.8h5.3v15.6h-6.9v-9.8Z"/>
+                    <path fill="#FFFFFF" d="M385,33.7l20.9-24.5h-8.2l-19.1,22.5h-4.3V9.2h-7.2v51.5h7.2v-18.6c-.1-1.3-.8-3.8-4.2-3.8v-.6h5.9s3.8,0,3.8,0l18.3,23.1h8.7l-21.8-26.9Z"/>
+                    <path fill="#FFFFFF" d="M581.6,54.9v-13.6c0-1.3-.6-4-4.2-4v-.6h4.2s28,0,28,0v-5.9h-28v-15.7h29v-5.9h-36.2v51.6h37.1v-5.9h-29.9Z"/>
+                    <path fill="#FFFFFF" d="M618.2,9.2v51.6h7.2V19.7c0-1.3-.7-3.9-4.2-3.9v-.6h5.9s26.7,0,26.7,0v45.7h7.2V9.2h-42.9Z"/>
+                    <path fill="#FFFFFF" d="M502.6,8.9v21.6s-28.5,0-28.5,0V8.9h-7.2v51.7h7.2v-19.7c0-1.3-.7-3.9-4.2-3.9v-.6h4.2s28.5,0,28.5,0v24.2s7.2,0,7.2,0V8.9h-7.2Z"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Нижняя строка: слева права, по центру ИП, справа политика -->
+        <div class="footer-bottom-line">
+            <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ. 2026</span>
+            <span class="footer-legal-inline">ИП Чмелёва Елена Анатольевна &middot; ИНН 381107766007</span>
+            <a href="#">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+        </div>
+    </footer>
+
+</body>
+</html>

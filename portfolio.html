@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио | Архитектурное бюро</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body style="background-color: var(--bg-light);">
+
+    
+
+    <!-- КАСТОМНЫЙ КУРСОР С ТЕКСТОМ -->
+    <div class="custom-cursor" id="cursor">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0 L15 5 L8 8 L5 15 Z" />
+        </svg>
+        <span class="cursor-text">СМОТРЕТЬ</span>
+    </div>
+
+    <!-- ШАПКА ДЛЯ СВЕТЛОГО ФОНА -->
+    <header class="header header--light">
+        <nav class="header-nav">
+            <a href="portfolio.html">ПРОЕКТЫ</a>
+            <a href="services.html">УСЛУГИ</a>
+            <a href="studio.html">БЮРО</a>
+        </nav>
+        
+        <div class="header-logo-wrap">
+            <a href="index.html">
+                <svg class="header-monogram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.6 265.7">
+                    <path d="M100,151.1c-.5-8.1-7.2-14.5-15.4-14.5v-2.4h107.8l20.8,60.9h28.7L175.4,3.6h-52.4L57.2,195.2h27.8l15-44.1ZM141.6,22.1h14.6c8.9,32.6,19.7,62.2,29.8,91.7h-74c9.9-29.5,20.9-59.1,29.5-91.7Z"/>
+                    <path d="M263.7,221.7v16.1H34.4v-16.1h-8v41.8h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1s229.3,0,229.3,0v19.1h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1v-22.7h-8Z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="header-action">
+            <a href="contacts.html">СВЯЗАТЬСЯ</a>
+        </div>
+    </header>
+
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ И ФИЛЬТРЫ -->
+    <section class="portfolio-header-section">
+        <h1 class="portfolio-main-title">ПОРТФОЛИО ПРОЕКТОВ</h1>
+        
+        <!-- ДВУХЭТАЖНЫЙ ТУЛБАР ELICYON -->
+        <div class="portfolio-toolbar">
+            <div class="filter-wrapper">
+                <span class="filter-sublabel">ФИЛЬТР ПРОЕКТОВ</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="development">ИНВЕСТИЦИОННЫЕ</button>
+                    <button class="filter-btn" data-filter="residential">ЖИЛЫЕ</button>
+                    <button class="filter-btn" data-filter="commercial">КОММЕРЧЕСКИЕ</button>
+                </div>
+            </div>
+            
+            <div class="grid-switcher">
+                <svg class="grid-icon active" viewBox="0 0 18 18" fill="currentColor">
+                    <rect x="0" y="0" width="7" height="7"/><rect x="11" y="0" width="7" height="7"/><rect x="0" y="11" width="7" height="7"/><rect x="11" y="11" width="7" height="7"/>
+                </svg>
+                <svg class="grid-icon" viewBox="0 0 18 18" fill="currentColor">
+                    <rect x="0" y="2" width="18" height="2"/><rect x="0" y="8" width="18" height="2"/><rect x="0" y="14" width="18" height="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+<!-- ГАЛЕРЕЯ (СЕТКА 6-3-3) -->
+    <section class="portfolio-gallery-section">
+        <div class="portfolio-grid">
+            
+            <!-- Проект 1 (Широкий) -->
+            <a href="#" class="port-card wide" data-category="development">
+                <div class="port-img-wrap">
+                    <img src="showcase-1.jpg" alt="Dubai Penthouse">
+                    <div class="port-overlay"></div>
+                </div>
+                <div class="port-info">
+                    <span class="port-category">ДУБАЙ &middot; ИНВЕСТИЦИОННЫЙ</span>
+                    <h3 class="port-name">АПАРТАМЕНТЫ ПЕНТХАУС</h3>
+                </div>
+            </a>
+
+            <!-- Проект 2 (Узкий) -->
+            <a href="#" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap">
+                    <img src="project-1.jpg" alt="Lancaster Residence">
+                    <div class="port-overlay"></div>
+                </div>
+                <div class="port-info">
+                    <span class="port-category">ХАМОВНИКИ &middot; ЖИЛОЙ</span>
+                    <h3 class="port-name">РЕЗИДЕНЦИЯ ЛАНКАСТЕР</h3>
+                </div>
+            </a>
+
+            <!-- Проект 3 (Узкий) -->
+            <a href="#" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap">
+                    <img src="project-2.jpg" alt="Curzon Apartment">
+                    <div class="port-overlay"></div>
+                </div>
+                <div class="port-info">
+                    <span class="port-category">ПАТРИАРШИЕ &middot; ЖИЛОЙ</span>
+                    <h3 class="port-name">ОСОБНЯК НА КУРЗОН</h3>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+</body>
+</html>

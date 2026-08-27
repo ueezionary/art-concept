@@ -1,0 +1,1663 @@
+/* =======================================================
+   1. БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ
+======================================================= */
+:root {
+    --bg-dark: #121212;
+    --bg-light: #F6F5F3;
+    --text-light: #FFFFFF;
+    --text-dark: #1A1A1A;
+    --text-muted: #8E8A83;
+    --font-serif: "Cormorant Garamond", Garamond, Georgia, serif;
+    --font-sans: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html { 
+    scroll-behavior: initial; 
+    overflow-y: scroll; 
+}
+
+body { 
+    background-color: var(--bg-light); 
+    color: var(--text-dark); 
+    font-family: var(--font-sans); 
+    -webkit-font-smoothing: antialiased; 
+    overflow-x: clip; /* clip не ломает sticky-позиционирование текста */
+}
+
+a, button { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: all 0.3s ease; 
+}
+
+/* Блокировка скролла для предотвращения тряски макета при загрузке */
+body.locked { 
+    overflow: hidden !important; 
+}
+
+
+/* =======================================================
+   2. ПРЕЛОАДЕР (ЗАНАВЕС)
+======================================================= */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background-color: #6a7fa8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+}
+
+.preloader-logo-wrap {
+    width: 55px;
+    height: auto;
+    opacity: 0; /* Прячем до начала анимации */
+}
+
+.preloader-logo { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+.preloader-logo path { 
+    fill: #FFFFFF !important; 
+    stroke: none !important; 
+}
+
+
+/* =======================================================
+   3. ШАПКА САЙТА (HEADER)
+======================================================= */
+.header { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    padding: 1.4rem 3vw; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 1002; 
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%); 
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.header.header--hidden { 
+    transform: translateY(-100%) !important; 
+}
+
+.header-nav { 
+    flex: 1; 
+    display: flex; 
+    gap: 36px; 
+}
+
+.header-nav a, 
+.header-action a { 
+    color: #FFFFFF !important; 
+    font-family: var(--font-sans); 
+    font-size: 13.5px; 
+    letter-spacing: 1.8px; 
+    text-transform: uppercase; 
+    opacity: 0.9;
+}
+
+.header-nav a:hover, 
+.header-action a:hover { 
+    opacity: 1; 
+}
+
+.header-logo-wrap { 
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.header-monogram { 
+    width: 34px; 
+    height: auto; 
+    display: block; 
+}
+
+.header-action { 
+    flex: 1; 
+    display: flex; 
+    justify-content: flex-end; 
+}
+
+.header-action a { 
+    border-bottom: 1px solid #FFFFFF; 
+    padding-bottom: 3px; 
+}
+
+/* Шапка для страниц со светлым фоном (портфолио / услуги) */
+.header.header--light {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+.header--light .header-nav a, 
+.header--light .header-action a {
+    color: var(--text-dark) !important;
+}
+
+.header--light .header-action a {
+    border-bottom-color: var(--text-dark) !important;
+}
+
+.header--light .header-monogram path {
+    fill: var(--text-dark) !important;
+}
+
+
+/* =======================================================
+   4. ГЛАВНЫЙ ЭКРАН (HERO)
+======================================================= */
+.hero { 
+    position: relative; 
+    width: 100%; 
+    height: 100vh; 
+    display: flex; 
+    overflow: hidden; 
+    background-color: var(--bg-dark); 
+    z-index: 1000;
+}
+
+.hero-media-wrapper, 
+.hero-overlay { 
+    position: absolute; 
+    inset: 0; 
+    z-index: 1; 
+}
+
+.hero-image { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: brightness(0.85); 
+    will-change: transform;
+}
+
+.hero-overlay { 
+    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%); 
+}
+
+.hero-brand-center { 
+    position: relative; 
+    z-index: 2; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 0 4vw; 
+    pointer-events: none; 
+}
+
+.hero-logo-svg { 
+    width: clamp(340px, 48vw, 750px); 
+    height: auto; 
+    filter: drop-shadow(0 6px 25px rgba(0, 0, 0, 0.45)); 
+}
+
+
+/* =======================================================
+   5. ФИЛОСОФИЯ: ЖУРНАЛЬНЫЙ MASK REVEAL
+======================================================= */
+.editorial-flow-section {
+    position: relative;
+    width: 100%;
+    height: 220vh; /* Запас высоты для спокойного чтения */
+    background-color: var(--bg-light);
+}
+
+.editorial-sticky-overlay {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.phrase-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.2em;
+}
+
+/* Линия-маска: скрывает всё, что выходит за границы строки */
+.line-mask {
+    overflow: hidden;
+    display: block;
+    padding: 0.1em 0;
+}
+
+.statement-row {
+    display: block;
+    white-space: nowrap;
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 2.4vw, 2.7rem);
+    font-weight: 300;
+    line-height: 1.15; 
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    will-change: transform;
+}
+
+.editorial-images-scatter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    z-index: 1;
+    overflow: hidden;
+    display: block !important; 
+}
+
+.scatter-item {
+    position: absolute !important; 
+    background-color: #e5e3df;
+    will-change: transform;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+.scatter-item img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.scatter-item.item-1 { top: 20vh; right: 2vw; width: 20vw !important; aspect-ratio: 3/4; }
+.scatter-item.item-2 { top: 25vh; left: 2vw; width: 18vw !important; aspect-ratio: 4/5; }
+.scatter-item.item-3 { top: 160vh; left: 2vw; width: 22vw !important; aspect-ratio: 3/4; }
+.scatter-item.item-4 { top: 55vh; right: 22vw; width: 22vw !important; aspect-ratio: 16/10; }
+.scatter-item.item-5 { top: 160vh; right: 2vw; width: 18vw !important; aspect-ratio: 3/4; }
+
+
+/* =======================================================
+   6. ГЛАВНАЯ: ТРИ КАРТОЧКИ (НАШИ ПРОЕКТЫ)
+======================================================= */
+.projects-wide { 
+    position: relative;
+    z-index: 20;
+    background-color: var(--bg-light);
+    margin-top: -35vh; 
+    padding: 8vh 4vw 16vh;
+    box-sizing: border-box;
+}
+
+.projects-grid-layout { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: stretch; 
+    width: 100%; 
+    min-height: 60vh;
+    gap: 3vw; 
+}
+
+/* Левая колонка */
+.projects-col-left { 
+    flex: 0 0 420px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+}
+
+.projects-title { 
+    font-family: var(--font-serif); 
+    font-size: clamp(3.2rem, 4.2vw, 5.2rem); 
+    font-weight: 300; 
+    text-transform: uppercase; 
+    line-height: 0.95; 
+    margin-bottom: 3vh; 
+    color: var(--text-dark); 
+    display: flex; 
+    flex-direction: column;
+}
+
+.projects-title .title-line-1 { align-self: flex-start; }
+.projects-title .title-line-2 { align-self: flex-start; margin-left: 1.2em; }
+
+.projects-desc { 
+    font-family: var(--font-sans); 
+    font-size: 14px; 
+    line-height: 1.25; 
+    font-weight: 300; 
+    color: #222222; 
+    max-width: 320px;
+}
+
+/* Центр: 3 карточки 9:14 */
+.projects-visuals-center { 
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 1vw; 
+    height: auto; 
+}
+
+.proj-card { 
+    position: relative; 
+    width: 15vw; 
+    aspect-ratio: 9 / 14; 
+    overflow: hidden; 
+    display: block; 
+    background-color: #e5e3df;
+}
+
+/* Ступени через translateY */
+.proj-card.card-1 { transform: translateY(-4vh); }
+.proj-card.card-2 { transform: translateY(6vh); }
+.proj-card.card-3 { transform: translateY(-1vh); }
+
+.proj-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.proj-overlay { 
+    position: absolute; 
+    inset: 0; 
+    background: rgba(0, 0, 0, 0.22); 
+    transition: background 0.4s ease; 
+}
+
+.proj-label { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-family: var(--font-sans); 
+    font-size: 14px; 
+    font-weight: 300; 
+    letter-spacing: 1.2px; 
+    color: #FFFFFF; 
+    z-index: 2; 
+    text-transform: uppercase; 
+    text-align: center; 
+    width: 90%;
+    pointer-events: none;
+}
+
+/* Правая колонка */
+.projects-col-right { 
+    flex: 0 0 340px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: flex-start; 
+    padding-bottom: 2vh;
+}
+
+/* Премиальная кнопка с анимированным сужением линии */
+.projects-link-underline { 
+    position: relative; 
+    display: inline-block;
+    margin-top: 3vh; 
+    font-family: var(--font-sans); 
+    font-size: 14px; 
+    letter-spacing: 1.5px; 
+    font-weight: 400; 
+    text-transform: uppercase; 
+    color: var(--text-dark); 
+    padding-bottom: 3px; 
+}
+
+.projects-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-dark);
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.projects-link-underline:hover::after {
+    transform-origin: right center;
+    transform: scaleX(0); 
+}
+
+.projects-link-underline:hover {
+    opacity: 1;
+}
+
+/* Фиксация идеальной центральной оси 50/50 */
+.split-teaser {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #EBE9E4;
+}
+
+.split-teaser.reverse {
+    flex-direction: row-reverse;
+}
+
+.split-image-col {
+    width: 50% !important;      /* Ровно половина экрана */
+    flex: 0 0 50% !important;   /* Запрещаем растягиваться и сжиматься */
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.split-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.15);
+    will-change: transform;
+}
+
+.split-text-col {
+    width: 50% !important;      /* Ровно половина экрана */
+    flex: 0 0 50% !important;   /* Запрещаем смещаться */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10vh 5vw;
+    text-align: center;
+    box-sizing: border-box;
+}
+/* Чистый белый текст поверх фото без фона и блюра */
+.split-caption {
+    position: absolute;
+    bottom: 3.5vw;
+    left: 3.5vw;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+}
+
+.split-caption:hover {
+    background: transparent !important;
+}
+
+.split-caption .caption-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.split-caption .caption-value {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 1.4vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Анимация стрелочки при наведении */
+.caption-arrow {
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-caption:hover .caption-arrow {
+    transform: translateX(8px);
+}
+
+.split-text-col {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10vh 5vw;
+    text-align: center;
+}
+
+/* Жестко заставляем кнопки в сплит-блоках отображаться всегда */
+.split-text-col .projects-link-underline {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.split-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 3.5vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    margin-bottom: 6vh;
+}
+
+/* Изящная маленькая фотография по центру текста */
+.split-mini-img {
+    width: 12vw;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    margin-bottom: 6vh;
+}
+
+.split-mini-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.split-desc {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.4;
+    color: #000000;
+    font-weight: 300;
+    max-width: 380px;
+    margin-bottom: 5vh;
+}
+
+
+/* =======================================================
+   8. СИНИЙ ФУТЕР (ФИНАЛЬНЫЙ СТРОГИЙ СТИЛЬ)
+======================================================= */
+.footer-cinematic {
+    background-color: #6a7fa8;
+    color: #FFFFFF;
+    padding: 12vh 4vw 3vh; 
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; 
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 5fr 3fr 3.5fr; 
+    gap: 4vw; 
+    width: 100%;
+    margin-bottom: 8vh;
+    align-items: flex-start;
+}
+
+.footer-form-col,
+.footer-nav-col,
+.footer-contacts-col {
+    max-width: none;
+    flex: none;
+}
+
+.footer-newsletter-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 3.5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1; 
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 2vh;
+    text-wrap: balance; 
+}
+
+/* Сняли жесткое ограничение max-width, чтобы текст шел широкой строкой */
+.footer-newsletter-desc {
+    font-family: var(--font-sans);
+    font-size: 16px; 
+    line-height: 1.5;
+    font-weight: 300;
+    opacity: 0.85;
+    margin-bottom: 5vh;
+    width: 100%; 
+}
+
+/* Форма */
+.footer-form { display: flex; flex-direction: column; gap: 3.5vh; max-width: 90%; }
+.form-row { display: flex; gap: 2vw; }
+.input-group { flex: 1; }
+
+.input-group input {
+    width: 100%; background: transparent; border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0 0 8px 0; color: #FFFFFF;
+    font-family: var(--font-sans); font-size: 11px;
+    letter-spacing: 1px; text-transform: uppercase;
+    outline: none; border-radius: 0; transition: border-color 0.3s ease;
+}
+.input-group input::placeholder { color: rgba(255, 255, 255, 0.7); }
+.input-group input:focus { border-bottom-color: #FFFFFF; }
+
+.custom-checkbox-wrap {
+    display: flex; align-items: flex-start; gap: 12px;
+    cursor: pointer; user-select: none; margin-top: 1vh;
+}
+.custom-checkbox-wrap input { display: none; }
+.checkbox-box {
+    width: 14px; height: 14px; border: 1px solid rgba(255, 255, 255, 0.5);
+    flex-shrink: 0; margin-top: 3px; position: relative;
+}
+.custom-checkbox-wrap input:checked ~ .checkbox-box { background-color: #FFFFFF; }
+
+.checkbox-label {
+    font-family: var(--font-sans);
+    font-size: 14px; 
+    font-weight: 300;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-submit-btn {
+    align-self: flex-start; color: #FFFFFF !important; background: none;
+    border: none; cursor: pointer; margin-top: 1vh; padding: 0 0 3px 0;
+}
+.footer-submit-btn::after { background-color: #FFFFFF !important; }
+
+/* Навигация */
+.footer-nav-col { 
+    display: flex; 
+    gap: 4vw; 
+    padding-top: 1vh; 
+}
+.footer-links-group { display: flex; flex-direction: column; gap: 12px; }
+.footer-links-group a {
+    font-family: var(--font-sans); font-size: 11px; letter-spacing: 1.5px;
+    color: #FFFFFF; opacity: 0.8; transition: opacity 0.3s ease; text-transform: uppercase;
+}
+.footer-links-group a:hover { opacity: 1; }
+
+/* Контакты справа (УБРАЛИ ГАРМОНД, СДЕЛАЛИ СТРОГИЙ SANS-SERIF) */
+.footer-contacts-col {
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5vh;
+    padding-top: 1vh; 
+}
+.footer-contact-link {
+    font-family: var(--font-sans); /* Переведено на общий шрифт */
+    font-size: 1.25rem; /* Аккуратный крупный размер */
+    font-weight: 300;
+    color: #FFFFFF; 
+    letter-spacing: 1px; 
+    transition: opacity 0.3s;
+}
+.footer-contact-link:hover { opacity: 0.7; }
+
+.footer-address {
+    font-family: var(--font-sans); 
+    font-size: 14px; 
+    line-height: 1.5;
+    font-weight: 300; 
+    color: rgba(255,255,255,0.85); 
+    margin-top: 1vh;
+}
+
+/* ИП и реквизиты (Приведены к единому минималистичному стилю) */
+.footer-legal {
+    font-family: var(--font-sans); 
+    font-size: 14px; 
+    line-height: 1.5;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85); 
+    margin-top: auto; 
+    letter-spacing: 0.5px;
+}
+
+/* ОГРОМНЫЙ ЛОГОТИП С ПАЛКОЙ */
+.footer-huge-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+    opacity: 0.12; 
+    will-change: transform, opacity;
+}
+
+.footer-huge-logo svg {
+    width: 100%;          
+    height: auto;
+    max-height: 22vh;     
+    fill: #FFFFFF;        
+    pointer-events: none;
+}
+
+/* Реквизиты ИП в одну строку по центру нижней линии */
+.footer-legal-inline {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+}
+
+/* Корректировка нижней полосы под 3 элемента */
+.footer-bottom-line {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding-top: 3vh;
+    font-family: var(--font-sans); 
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5); 
+    text-transform: uppercase;
+}
+.footer-bottom-line a { transition: color 0.3s; }
+.footer-bottom-line a:hover { color: #FFF; }
+
+/* ОГРОМНЫЙ ЛОГОТИП (ВЕКТОР) */
+.footer-huge-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+    opacity: 0.12; 
+    will-change: transform, opacity;
+}
+
+/* Прицеливаемся прямо в твой скопированный SVG */
+.footer-huge-logo svg {
+    width: 100%;          
+    height: auto;
+    max-height: 25vh;     /* Чтобы не разорвал высоту футера */
+    fill: #FFFFFF;        /* Красим вектор в чисто белый */
+    pointer-events: none;
+}
+
+
+/* =======================================================
+   8. СТРАНИЦА ПОРТФОЛИО (ИДЕАЛЬНО ДЛЯ 2K МОНИТОРОВ)
+======================================================= */
+.portfolio-header-section {
+    padding: 18vh 3vw 2.5vh; /* 3vw строго как у шапки */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.portfolio-main-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3.2rem, 4.8vw, 6.5rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: var(--text-dark);
+    margin-bottom: 9vh;
+}
+
+/* Тулбар: привязан строго к сетке фото */
+.portfolio-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding-bottom: 2vh;
+}
+
+/* Двухэтажный блок категорий */
+.filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.filter-sublabel {
+    font-family: var(--font-sans);
+    font-size: 14px;         /* Размер совпадает с подписями карточек */
+    font-weight: 200;        /* Минимальная толщина */
+    letter-spacing: 2px;     /* Просторный межбуквенный интервал */
+    text-transform: uppercase;
+    color: #000000;
+}
+
+.filter-buttons {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(24px, 2.5vw, 48px); /* Идеальный шаг для 2K */
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 1.5vw, 1.9rem); /* Выразительный размер под 2K */
+    font-weight: 300;
+    letter-spacing: 0.8px;
+    color: #A0A0A0;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.filter-btn.active, 
+.filter-btn:hover {
+    color: var(--text-dark);
+}
+
+/* Иконки переключения сетки справа */
+.grid-switcher {
+    display: flex;
+    gap: 14px;
+    color: #BBBBBB;
+    padding-bottom: 2px;
+}
+
+.grid-switcher .grid-icon {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.grid-switcher .grid-icon.active, 
+.grid-switcher .grid-icon:hover {
+    color: var(--text-dark);
+}
+
+/* --- СЕТКА ГАЛЕРЕИ (ТЯНЕТСЯ НА ВЕСЬ 2K ЭКРАН) --- */
+.portfolio-gallery-section {
+    padding: 0 3vw 16vh; /* Строго 3vw слева и справа */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4vw 1.2vw; /* Плотный люксовый зазор между фото */
+    width: 100%;
+}
+
+.port-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.port-card.wide {
+    grid-column: span 6; /* 50% экрана */
+}
+
+.port-card.narrow {
+    grid-column: span 3; /* 25% экрана */
+}
+
+.port-img-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: #e5e3df;
+    position: relative;
+    margin-bottom: 1.6vh;
+}
+
+.port-card.wide .port-img-wrap {
+    aspect-ratio: 16 / 10.5;
+}
+
+.port-card.narrow .port-img-wrap {
+    aspect-ratio: 4 / 5;
+}
+
+/* Монолитная статика без зума */
+.port-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.port-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.04);
+    transition: background 0.4s ease;
+}
+
+.port-card:hover .port-overlay {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.port-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+
+/* Мелкая подпись (Город / Категория) */
+.port-category {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    color: #777777;
+    text-transform: uppercase;
+}
+
+/* Крупное название проекта */
+.port-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 1.7vw, 2.2rem); /* БЫЛО: 1.25rem — сделали заметно крупнее для 2K */
+    font-weight: 300;        /* Тонкое журнальное начертание Cormorant */
+    letter-spacing: 0.04em;  /* Легкая разрядка для премиального вида */
+    line-height: 1.1;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+
+/* =======================================================
+   9. КАСТОМНЫЙ КУРСОР С ИНВЕРСИЕЙ ЦВЕТА
+======================================================= */
+html, body, a, button, input, [role="button"] { 
+    cursor: none !important; 
+}
+
+.custom-cursor {
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 0; 
+    height: 0;
+    pointer-events: none; 
+    z-index: 99999;
+    mix-blend-mode: difference; /* Магическая инверсия пикселей */
+}
+
+.custom-cursor svg {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 17px; 
+    height: 17px;
+}
+
+.custom-cursor path { 
+    fill: #FFFFFF; /* Белый цвет дает чистую инверсию */
+}
+
+.cursor-text {
+    position: absolute;
+    top: 18px;
+    left: 14px;
+    font-family: var(--font-sans);
+    font-size: 8.5px;
+    letter-spacing: 2px;
+    color: #FFFFFF; 
+    font-weight: 200;
+    -webkit-font-smoothing: antialiased;
+    white-space: nowrap;
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+}
+
+/* =======================================================
+   10. СТРАНИЦА "О БЮРО" (СТУДИЯ)
+======================================================= */
+
+/* Полноэкранный Hero */
+.studio-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+}
+.studio-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.studio-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05); 
+}
+.hero-dark-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); 
+}
+.studio-hero-title {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 8vw, 10rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+/* Блок основателя */
+.studio-founder-section {
+    padding: 16vh 3vw; /* Уменьшили боковые отступы до 3vw (как у шапки) */
+    background-color: var(--bg-light);
+}
+.founder-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Дали левой текстовой колонке больше ширины */
+    gap: 5vw; /* Уменьшили зазор между текстом и фото */
+    max-width: 1700px;
+    margin: 0 auto;
+    align-items: center;
+}
+.founder-text-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* УВЕЛИЧЕНО ДО 14px */
+.founder-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 14px; 
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2vh;
+}
+
+.founder-name {
+    font-family: var(--font-serif);
+    font-size: clamp(3.2rem, 4.2vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--text-dark);
+    margin-bottom: 4vh;
+    line-height: 1.05;
+}
+
+.founder-bio {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333333;
+    font-weight: 300;
+    margin-bottom: 6vh;
+    max-width: 100%; /* Убрали ограничение 90%, чтобы строка не ломалась */
+}
+
+.founder-bio p {
+    margin-bottom: 1.8vh;
+}
+
+/* Список наград в строгом гротеске */
+.founder-awards-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.award-item {
+    display: flex;
+    align-items: baseline;
+    gap: 3vw;
+    padding: 2.6vh 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.award-year {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #888888;
+    min-width: 50px;
+    flex-shrink: 0;
+}
+
+.award-title {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    color: #1a1a1a;
+}
+/* Правая колонка с фото */
+.founder-portrait-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: #e5e3df;
+    overflow: hidden;
+}
+.founder-portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Секция Партнеров (ЛОГОТИПЫ) */
+.studio-logos-section {
+    padding: 15vh 4vw;
+    background-color: var(--bg-light);
+    border-top: 1px solid #EAEAEA;
+}
+.partners-bg {
+    background-color: #F0EFEA; 
+    border-top: none;
+}
+.logos-section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-dark);
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+.partners-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10vh;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.partners-desc {
+    font-family: var(--font-sans);
+    font-size: 16px; /* Крупный читаемый текст */
+    line-height: 1.5;
+    color: #555;
+    max-width: 450px;
+    text-align: right;
+    font-weight: 300;
+}
+
+/* Сетка карточек партнеров */
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 в ряд */
+    gap: 4vw;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.partner-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5vh;
+}
+
+/* Заглушка для логотипа */
+.logo-placeholder {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-family: var(--font-sans);
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #999;
+    background-color: #FAFAFA;
+}
+
+/* УВЕЛИЧЕНО ДО 15px */
+.partner-desc {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: #666;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* УВЕЛИЧЕНО ДО 14px */
+.partner-promo {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--text-dark);
+    padding-bottom: 2px;
+}
+
+/* =======================================================
+   9. СТРАНИЦА КОНТАКТОВ (СТИЛЬ ELICYON)
+======================================================= */
+.contact-hero-section {
+    padding: 18vh 6vw 12vh;
+    background-color: #f4f1ea; /* Фирменный фоновый цвет */
+}
+
+.contact-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 8vw;
+    align-items: start; /* Возвращаем привязку к верху, но двигаем саму колонку */
+}
+
+/* Опускаем всю правую колонку с формой вниз на нужную высоту */
+.contact-hero-right {
+    margin-top: 25vh; /* <--- Увеличивай или уменьшай эту цифру, чтобы опустить форму ниже */
+}
+
+.contact-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 3.2vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #222;
+}
+
+.contact-main-form {
+    gap: 4vh;
+}
+
+/* Цвет инпутов и текста для формы на странице контактов */
+.contact-main-form input {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+    color: #1a1a1a !important;
+}
+
+.contact-main-form input::placeholder {
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.contact-main-form input:focus {
+    border-bottom-color: #1a1a1a !important;
+}
+
+.contact-main-form .checkbox-box {
+    border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.contact-main-form input:checked ~ .checkbox-box {
+    background-color: #1a1a1a !important;
+}
+
+.contact-main-form .checkbox-label {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.contact-main-form .footer-submit-btn {
+    color: #1a1a1a !important;
+}
+
+.contact-main-form .footer-submit-btn::after {
+    background-color: #1a1a1a !important;
+}
+
+/* Сплит блок с почтами (Синий / Бежевый) */
+.contact-split-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.contact-split-box {
+    padding: 12vh 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Выравниваем всё по центру горизонтали */
+    text-align: center;   /* Текст тоже по центру */
+    gap: 5vh;
+}
+.blue-side {
+    background-color: #6a7fa8;
+    color: #FFFFFF;
+}
+
+.beige-side {
+    background-color: #eae5dc;
+    color: #222222;
+}
+
+.contact-box-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 2.5vw, 3rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.contact-info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем блоки с почтами и телефонами */
+    gap: 6px;
+}
+
+.contact-city-label {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.contact-split-box a {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+}
+
+.blue-side a { color: #FFFFFF; }
+.beige-side a { color: #222222; }
+.contact-split-box a:hover { opacity: 0.7; }
+
+.press-preview-card img {
+    width: 180px;
+    height: auto;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.contact-location-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Левая колонка уже, правая (карта) в два раза шире */
+    background-color: #f4f1ea;
+    padding: 12vh 6vw;
+    align-items: center;
+    gap: 4vw;
+}
+
+.location-text-col {
+    padding-left: 4vw;
+}
+
+.location-map-col {
+    width: 100%;
+    height: 500px; /* Высота блока карты */
+}
+
+.location-map-col iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    filter: grayscale(100%) contrast(1.1); /* Стильная ч/б карта */
+}
+
+/* Фирменный отступ (сдвиг вправо) для второй строки заголовков */
+.offset-line {
+    display: inline-block;
+    padding-left: 1.5em; /* Регулируй ширину отступа здесь, если захочется больше или меньше */
+}
+
+/* --- ИДЕАЛЬНЫЕ 50/50 БЛОКИ С ЖЕСТКОЙ СЕТКОЙ И ДИНАМИКОЙ --- */
+.service-compact-section {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; 
+    width: 100%;
+    
+    /* 1. ЖЕСТКАЯ ВЫСОТА для нечетных блоков (чуть "уже" по высоте) */
+    height: 55vh; 
+    min-height: 450px; /* Защита, чтобы текст не слипся на маленьких ноутах */
+    overflow: hidden; /* Обрезаем всё, что пытается вылезти */
+}
+
+/* 2. Четные блоки (с классом reverse) делаем выше для динамики! */
+.service-compact-section.reverse {
+    flex-direction: row-reverse;
+    height: 75vh; 
+    min-height: 600px;
+}
+
+.compact-media {
+    width: 50%; 
+    position: relative; /* Обязательно для фиксации картинки */
+    overflow: hidden;
+}
+
+/* 3. АБСОЛЮТНОЕ ПОЗИЦИОНИРОВАНИЕ — картинка больше не ломает блок */
+.compact-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.compact-content {
+    width: 50%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6vh 6vw; 
+    position: relative;
+    overflow: hidden;
+}
+
+.compact-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 3vh;
+    text-transform: uppercase;
+}
+
+/* Расширили текст и добавили умный перенос */
+.compact-desc {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+    margin-bottom: 5vh;
+    max-width: 600px; /* Увеличили ширину! Теперь текст дышит */
+    text-wrap: pretty; /* Браузер сам уберет одинокие слова на последней строке */
+}
+
+/* =======================================================
+   ЛЮКСОВАЯ СТРОКА: ЦЕНА + ССЫЛКА
+======================================================= */
+.compact-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Выравниваем ровно по ширине текста */
+    padding-top: 2.5vh;
+    border-top: 1px solid;
+}
+
+/* Линия сама подстраивается под цвет фона (светлая на темном, темная на светлом) */
+.bg-ivory .compact-action-row { border-top-color: rgba(0, 0, 0, 0.15); }
+.bg-blue .compact-action-row { border-top-color: rgba(255, 255, 255, 0.25); }
+.bg-brown .compact-action-row { border-top-color: rgba(255, 255, 255, 0.25); }
+
+.compact-price {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 300; /* Тонкий журнальный шрифт */
+    letter-spacing: 1.5px; /* Выравниваем интервал со ссылкой */
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.compact-link-arrow {
+    font-family: var(--font-sans);
+    font-size: 14px; /* Увеличили до 14px */
+    font-weight: 300; /* Тот же тонкий шрифт */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.compact-link-arrow:hover {
+    opacity: 1;
+}
+
+.compact-link-arrow svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compact-link-arrow:hover svg {
+    transform: translateX(6px);
+}
+
+/* =======================================================
+   ЦВЕТОВЫЕ ТЕМЫ ДЛЯ БЛОКОВ УСЛУГ
+======================================================= */
+
+/* ТЕМА 1: Слоновая кость (Светлая) */
+.bg-ivory {
+    background-color: #EBE9E4;
+    color: var(--text-dark);
+}
+.bg-ivory .compact-title, 
+.bg-ivory .compact-desc { color: var(--text-dark); }
+.bg-ivory .projects-link-underline { color: var(--text-dark); }
+.bg-ivory .projects-link-underline::after { background-color: var(--text-dark); }
+
+/* ТЕМА 2: Синий фирменный (Темная) */
+.bg-blue {
+    background-color: #6a7fa8;
+    color: #FFFFFF;
+}
+.bg-blue .compact-title, 
+.bg-blue .compact-desc { color: #FFFFFF; }
+.bg-blue .projects-link-underline { color: #FFFFFF; }
+.bg-blue .projects-link-underline::after { background-color: #FFFFFF; }
+
+/* ТЕМА 3: Дорогой шоколадный (Темная) */
+.bg-brown {
+    background-color: #483c32; /* Глубокий кофейный/трюфельный оттенок */
+    color: #FFFFFF;
+}
+.bg-brown .compact-title, 
+.bg-brown .compact-desc { color: #FFFFFF; }
+.bg-brown .projects-link-underline { color: #FFFFFF; }
+.bg-brown .projects-link-underline::after { background-color: #FFFFFF; }
+
+/* =======================================================
+   ВВОДНЫЙ БЛОК НА СТРАНИЦЕ УСЛУГ (КОТОРЫЙ СЛЕТЕЛ)
+======================================================= */
+.service-intro-block {
+    padding: 22vh 4vw 12vh; /* 22vh дает отступ от шапки, чтобы текст не налипал на меню */
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 8vw;
+    background-color: var(--bg-light);
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.intro-giant-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 3.8vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.intro-text {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+    color: #333333;
+    margin-bottom: 3vh;
+}
+
+/* =======================================================
+   ТЕМНЫЙ ФУТЕР ДЛЯ СТРАНИЦЫ УСЛУГ
+======================================================= */
+.footer-cinematic.footer-dark {
+    background-color: #1A1A1A; /* Роскошный графитовый почти черный */
+    /* Если хочешь коричневый, замени на: background-color: #483c32; */
+}
+
+/* =======================================================
+   ЛЕНТА ЛОГОТИПОВ НАГРАД (Под блоком основателя)
+======================================================= */
+.awards-logos-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3vw;
+    margin-top: 10vh;
+    padding-top: 6vh;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.award-logo-item {
+    height: clamp(25px, 3vw, 45px); /* Автоматически меняют размер на разных экранах */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.award-logo-item img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.5); /* Делаем их строгими серыми по умолчанию */
+    transition: all 0.4s ease;
+}
+
+/* При наведении курсора логотип загорается оригинальным цветом */
+.award-logo-item:hover img {
+    filter: grayscale(0%) opacity(1);
+}

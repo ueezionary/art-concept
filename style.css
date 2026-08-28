@@ -49,7 +49,7 @@ body.locked {
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background-color: #6a7fa8;
+    background-color: #4d586c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -598,7 +598,7 @@ body.locked {
    8. СИНИЙ ФУТЕР (ФИНАЛЬНЫЙ СТРОГИЙ СТИЛЬ)
 ======================================================= */
 .footer-cinematic {
-    background-color: #6a7fa8;
+    background-color: #4d586c;
     color: #FFFFFF;
     padding: 12vh 4vw 3vh; 
     width: 100%;
@@ -1568,7 +1568,7 @@ html, body, a, button, input, [role="button"] {
 
 /* ТЕМА 2: Синий фирменный (Темная) */
 .bg-blue {
-    background-color: #6a7fa8;
+    background-color: #4d586c;
     color: #FFFFFF;
 }
 .bg-blue .compact-title, 

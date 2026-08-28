@@ -309,3 +309,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+/* =======================================================
+   БУРГЕР МЕНЮ
+======================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerBtn = document.querySelector('.burger-btn');
+    const body = document.body;
+
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', () => {
+            body.classList.toggle('menu-open');
+        });
+    }
+});

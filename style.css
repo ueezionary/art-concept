@@ -2034,70 +2034,90 @@ html, body, a, button, input, [role="button"] {
 }
 
 /* =======================================================
-   11. БРОНЕБОЙНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 768px)
+   11. БУРГЕР МЕНЮ (БАЗА)
+======================================================= */
+/* Прячем бургер и мобильное меню на компьютерах */
+.burger-btn, .mobile-menu-overlay { display: none; }
+
+/* =======================================================
+   12. БРОНЕБОЙНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 768px)
 ======================================================= */
 @media (max-width: 768px) {
 
-    /* --- БАЗОВЫЕ ОТСТУПЫ --- */
     body { overflow-x: hidden !important; }
     
-    /* --- ШАПКА --- */
-    .header { padding: 15px 5vw !important; }
-    .header-nav { display: none !important; } /* Прячем меню, оставляем лого и кнопку */
+    /* --- ШАПКА И БУРГЕР --- */
+    .header { padding: 15px 5vw !important; justify-content: space-between !important; }
+    .header-nav, .header-action { display: none !important; } /* Прячем старое меню */
+    .header-logo-wrap { flex: none !important; }
+    
+    /* Кнопка бургера */
+    .burger-btn {
+        display: flex !important; flex-direction: column; justify-content: center; gap: 6px;
+        width: 35px; height: 35px; background: transparent; border: none; cursor: pointer; z-index: 100000;
+    }
+    .burger-btn span {
+        display: block; width: 100%; height: 1px; background-color: #fff; transition: transform 0.3s;
+    }
+    .header.header--light .burger-btn span { background-color: #1a1a1a; }
+    body.menu-open .burger-btn span { background-color: #fff !important; } /* Крестик всегда белый */
+    
+    /* Анимация превращения в крестик */
+    body.menu-open .burger-btn span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+    body.menu-open .burger-btn span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
 
-    /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+    /* Окно мобильного меню */
+    .mobile-menu-overlay {
+        display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+        background-color: #1a1a1a; z-index: 99999; flex-direction: column; justify-content: center; align-items: center;
+        opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    body.menu-open .mobile-menu-overlay { opacity: 1; pointer-events: auto; }
+    body.menu-open { overflow: hidden !important; }
+    .mobile-nav { display: flex; flex-direction: column; gap: 35px; text-align: center; }
+    .mobile-nav a { font-family: var(--font-serif); font-size: 2rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+
+    /* --- ГЛАВНЫЙ ЭКРАН --- */
     .hero-logo-svg { width: 85vw !important; max-width: 300px !important; }
 
-    /* --- ФИЛОСОФИЯ (ЖУРНАЛЬНЫЙ ТЕКСТ С КАРТИНКАМИ) --- */
-    .editorial-flow-section { height: auto !important; padding: 10vh 0 !important; }
-    .editorial-sticky-overlay { position: relative !important; height: auto !important; }
-    .phrase-container { position: relative !important; padding: 0 5vw !important; text-align: center !important; }
-    /* Разрешаем тексту переноситься на новые строки */
-    .statement-row { white-space: normal !important; font-size: 24px !important; line-height: 1.4 !important; }
-    /* Прячем летающие картинки на телефоне, чтобы был чистый текст */
-    .editorial-images-scatter { display: none !important; } 
+    /* --- ФИЛОСОФИЯ (УБИВАЕМ АНИМАЦИЮ, ДЕЛАЕМ КРАСИВУЮ СТАТИКУ) --- */
+    .editorial-flow-section { height: auto !important; padding: 10vh 5vw 5vh !important; }
+    .editorial-sticky-overlay { position: relative !important; height: auto !important; flex-direction: column !important; align-items: flex-start !important; }
+    .phrase-container { position: relative !important; width: 100% !important; flex-direction: column !important; gap: 15px !important; padding: 0 !important; text-align: left !important; }
+    .line-mask { overflow: visible !important; padding: 0 !important; }
+    
+    /* Текст больше не дергается! */
+    .statement-row {
+        white-space: normal !important; font-size: 22px !important; line-height: 1.4 !important;
+        transform: none !important; opacity: 1 !important; display: block !important; text-align: left !important;
+    }
+    
+    /* Возвращаем одну стильную фотку вниз блока */
+    .editorial-images-scatter { display: block !important; position: relative !important; height: auto !important; margin-top: 40px !important; }
+    .scatter-item { display: none !important; } /* Прячем все летающие картинки */
+    .scatter-item.item-1 { display: block !important; position: relative !important; top: 0 !important; right: 0 !important; left: 0 !important; width: 100% !important; aspect-ratio: 4/5 !important; margin: 0 !important; }
 
-    /* --- ГЛАВНАЯ: ТРИ ПРОЕКТА --- */
+    /* --- ОСТАЛЬНАЯ БАЗА (ПРОЕКТЫ, УСЛУГИ, ФУТЕР) --- */
     .projects-wide { padding: 60px 5vw !important; margin-top: 0 !important; }
-    .projects-grid-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
-    .projects-col-left, .projects-col-right { width: 100% !important; flex: none !important; padding: 0 !important; text-align: left !important; }
-    .projects-title { font-size: 3rem !important; }
-    .projects-title .title-line-2 { margin-left: 0 !important; }
-    .projects-visuals-center { display: flex !important; flex-direction: column !important; width: 100% !important; gap: 20px !important; }
-    .proj-card { width: 100% !important; aspect-ratio: 4/5 !important; transform: none !important; margin: 0 !important; } /* Убиваем ступеньки */
-
-    /* --- СПЛИТ-БЛОКИ (ДИЗАЙН ИНТЕРЬЕРА И Т.Д.) --- */
-    .split-teaser, .split-teaser.reverse { display: flex !important; flex-direction: column !important; min-height: auto !important; height: auto !important; }
-    .split-image-col { width: 100% !important; flex: none !important; height: 50vh !important; }
-    .split-text-col { width: 100% !important; flex: none !important; padding: 60px 5vw !important; align-items: flex-start !important; text-align: left !important; }
-    .split-title { font-size: 2.2rem !important; line-height: 1.1 !important; text-align: left !important; word-wrap: break-word !important; hyphens: auto; }
+    .projects-grid-layout, .projects-visuals-center, .split-teaser, .split-teaser.reverse, 
+    .service-compact-section, .service-compact-section.reverse, .founder-grid, .footer-grid { 
+        display: flex !important; flex-direction: column !important; height: auto !important; min-height: auto !important; 
+    }
+    .projects-col-left, .projects-col-right, .split-image-col, .split-text-col, .compact-media, .compact-content { 
+        width: 100% !important; flex: none !important; padding: 0 !important; 
+    }
+    .split-text-col, .compact-content { padding: 50px 5vw !important; text-align: left !important; align-items: flex-start !important; }
+    .split-image-col, .compact-media { height: 50vh !important; }
+    
+    .proj-card, .founder-portrait-wrap { width: 100% !important; aspect-ratio: 4/5 !important; transform: none !important; margin: 0 !important; max-width: 100% !important; }
+    .projects-title, .founder-name { font-size: 3rem !important; line-height: 1 !important; }
+    .split-title, .compact-title, .footer-newsletter-title { font-size: 2.2rem !important; line-height: 1.1 !important; word-wrap: break-word; }
     .split-mini-img { width: 50vw !important; margin-bottom: 30px !important; }
-
-    /* --- УСЛУГИ: КОМПАКТНЫЕ БЛОКИ (КОНСУЛЬТАЦИЯ) --- */
-    .service-compact-section, .service-compact-section.reverse { display: flex !important; flex-direction: column !important; height: auto !important; min-height: auto !important; }
-    .compact-media { width: 100% !important; height: 40vh !important; flex: none !important; }
-    .compact-content { width: 100% !important; flex: none !important; padding: 50px 5vw !important; }
-    .compact-title { font-size: 2.2rem !important; word-wrap: break-word !important; hyphens: auto; }
-    /* Строка цены и ссылки друг под другом */
-    .compact-action-row { flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
-
-    /* --- СТУДИЯ (АЛЁНА ВОЛКОВА И НАГРАДЫ) --- */
-    .founder-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
-    .founder-name { font-size: 3rem !important; line-height: 1 !important; word-wrap: break-word; }
-    /* Вытягиваем фото основателя на всю ширину */
-    .founder-portrait-wrap { width: 100% !important; max-width: 100% !important; margin-top: 20px !important; display: block !important; }
-    /* Награды в 2 колонки */
+    
     .awards-logos-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 30px 15px !important; padding: 0 5vw !important; margin-top: 60px !important; width: 100% !important; left: 0 !important; margin-left: 0 !important; }
     .award-logo-item img { max-width: 100% !important; height: auto !important; }
-
-    /* --- ФУТЕР И ФОРМА --- */
+    
     .footer-cinematic { padding: 60px 5vw 40px !important; }
-    .footer-grid { display: flex !important; flex-direction: column !important; gap: 50px !important; align-items: flex-start !important; }
-    .footer-newsletter-title { font-size: 2.2rem !important; line-height: 1.1 !important; word-wrap: break-word; }
-    .footer-form { width: 100% !important; max-width: 100% !important; }
-    /* Имя и Телефон друг под другом */
+    .footer-form, .input-group { width: 100% !important; max-width: 100% !important; }
     .form-row { display: flex !important; flex-direction: column !important; gap: 30px !important; }
-    .input-group { width: 100% !important; }
-    .footer-submit-btn { margin-top: 10px !important; }
-    .footer-bottom-line { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
 }

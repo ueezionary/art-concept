@@ -2192,9 +2192,8 @@ html, body, a, button, input, [role="button"] {
     
     .projects-title { font-size: 2.8rem !important; line-height: 1 !important; }
     .split-title, .compact-title { font-size: 2.2rem !important; line-height: 1.1 !important; }
-}
 
-/* --- ИДЕАЛЬНЫЙ ФУТЕР БЕЗ МУСОРА --- */
+    /* --- ИДЕАЛЬНЫЙ ФУТЕР БЕЗ МУСОРА --- */
     .footer-cinematic {
         padding: 50px 25px 30px !important;
         box-sizing: border-box !important;
@@ -2295,3 +2294,13 @@ html, body, a, button, input, [role="button"] {
     .footer-legal-inline {
         display: block !important;
     }
+
+    /* Убираем любые градиенты и затемнения шапки, когда меню открыто */
+    body.menu-open .header::before,
+    body.menu-open .header::after,
+    body.menu-open .header {
+        background: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+}

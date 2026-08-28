@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } else {
         // --- ЛОГИКА ДЛЯ ОСТАЛЬНЫХ СТРАНИЦ (ЗАЩИТА ОТ МОРГАНИЯ) ---
-        // Жестко прячем body сразу при загрузке DOM, а потом плавно проявляем всю страницу
         gsap.fromTo(document.body, 
             { opacity: 0 }, 
             { opacity: 1, duration: 0.6, ease: "power2.inOut", onComplete: () => {
@@ -78,10 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }}
         );
 
-        // Мягкий въезд элементов внутри проявившейся страницы
         const header = document.querySelector('.header');
         const heroImg = document.querySelector('.hero-image, .studio-hero-bg img, .compact-media img');
-        const mainTitles = document.querySelectorAll('.intro-giant-title, .studio-hero-title, .projects-title, .compact-title');
+        const mainTitles = document.querySelectorAll('.intro-giant-title, .studio-hero-title, .projects-title');
 
         if (heroImg) gsap.from(heroImg, { scale: 1.05, duration: 1.5, ease: "power3.out", delay: 0.1 });
         if (mainTitles.length > 0) gsap.from(mainTitles, { y: 20, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.2 });
@@ -160,8 +158,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+   // =======================================================
+    // 7. ЛЮКСОВАЯ АНИМАЦИЯ СПЛИТ-ЭКРАНОВ И УСЛУГ
     // =======================================================
-    // 7. УМНЫЙ ХЕДЕР
+    const splitSections = document.querySelectorAll('.split-teaser, .service-compact-section');
+
+    if (splitSections.length > 0) {
+        splitSections.forEach((section) => {
+            // Ищем все картинки внутри секции (и большую, и маленькую в тексте)
+            const imgs = section.querySelectorAll('.split-image-col img, .split-img img, .compact-media img');
+            
+            // Ищем текстовый контейнер
+            const contentContainer = section.querySelector('.split-text-col, .compact-content');
+            const contentElems = contentContainer ? contentContainer.children : null;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // 1. Плавный зум картинок
+            if (imgs.length > 0) {
+                tl.fromTo(imgs, 
+                    { scale: 1.12, opacity: 0 }, 
+                    { scale: 1, opacity: 1, duration: 1.4, stagger: 0.1, ease: "power3.out" },
+                    0
+                );
+            }
+
+            // 2. Плавный каскадный подъем текстов, заголовка и ссылок
+            if (contentElems && contentElems.length > 0) {
+                tl.fromTo(contentElems, 
+                    { y: 30, opacity: 0 }, 
+                    { y: 0, opacity: 1, duration: 1, stagger: 0.12, ease: "power2.out" },
+                    0.2
+                );
+            }
+        });
+    }
+
+    // =======================================================
+    // 8. УМНЫЙ ХЕДЕР
     // =======================================================
     const headerEl = document.querySelector('.header');
     if (headerEl) {
@@ -178,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =======================================================
-    // 8. АНИМАЦИЯ ОГРОМНОГО ЛОГОТИПА В ФУТЕРЕ
+    // 9. АНИМАЦИЯ ОГРОМНОГО ЛОГОТИПА В ФУТЕРЕ
     // =======================================================
     const footerHugeLogo = document.querySelector('.footer-huge-logo');
     if (footerHugeLogo) {
@@ -192,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =======================================================
-    // 9. БЕСШОВНЫЙ ВЫХОД (ПЛАВНОЕ РАСТВОРЕНИЕ ПРИ КЛИКЕ)
+    // 10. БЕСШОВНЫЙ ВЫХОД (ПЛАВНОЕ РАСТВОРЕНИЕ ПРИ КЛИКЕ)
     // =======================================================
     const internalLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([href^="#"])');
 
@@ -219,46 +259,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-});
-
-// ==========================================
-// ЛЮКСОВАЯ АНИМАЦИЯ БЛОКОВ УСЛУГ
-// ==========================================
-const serviceSections = document.querySelectorAll('.service-compact-section');
-
-serviceSections.forEach((section) => {
-    const img = section.querySelector('.compact-media img');
-    const contentElems = section.querySelector('.compact-content').children; // Заголовок, текст, цена
-
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: section,
-            start: "top 75%", // Анимация начинается, когда блок на 75% показался на экране
-            toggleActions: "play none none reverse" 
-        }
-    });
-
-    // 1. Фотография плавно уменьшается из зума (эффект дыхания)
-    if (img) {
-        tl.fromTo(img, 
-            { scale: 1.15, opacity: 0 }, 
-            { scale: 1, opacity: 1, duration: 1.4, ease: "power3.out" },
-            0 // Старт на нулевой секунде
-        );
-    }
-
-    // 2. Текст, заголовок и линия с ценой плавно выплывают друг за другом
-    if (contentElems) {
-        tl.fromTo(contentElems, 
-            { y: 30, opacity: 0 }, 
-            { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power2.out" },
-            0.2 // Текст начинает появляться с легкой задержкой после картинки
-        );
-    }
-});
+}); // ЗАКРЫВАЕМ DOMContentLoaded ЗДЕСЬ!
 
 // =======================================================
-// 10. ВОССТАНОВЛЕНИЕ ПРОЗРАЧНОСТИ ДЛЯ SAFARI (Кнопка "Назад")
+// 11. ВОССТАНОВЛЕНИЕ ПРОЗРАЧНОСТИ ДЛЯ SAFARI (Кнопка "Назад")
 // =======================================================
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {

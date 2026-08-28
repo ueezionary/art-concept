@@ -221,6 +221,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// ==========================================
+// ЛЮКСОВАЯ АНИМАЦИЯ БЛОКОВ УСЛУГ
+// ==========================================
+const serviceSections = document.querySelectorAll('.service-compact-section');
+
+serviceSections.forEach((section) => {
+    const img = section.querySelector('.compact-media img');
+    const contentElems = section.querySelector('.compact-content').children; // Заголовок, текст, цена
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: "top 75%", // Анимация начинается, когда блок на 75% показался на экране
+            toggleActions: "play none none reverse" 
+        }
+    });
+
+    // 1. Фотография плавно уменьшается из зума (эффект дыхания)
+    if (img) {
+        tl.fromTo(img, 
+            { scale: 1.15, opacity: 0 }, 
+            { scale: 1, opacity: 1, duration: 1.4, ease: "power3.out" },
+            0 // Старт на нулевой секунде
+        );
+    }
+
+    // 2. Текст, заголовок и линия с ценой плавно выплывают друг за другом
+    if (contentElems) {
+        tl.fromTo(contentElems, 
+            { y: 30, opacity: 0 }, 
+            { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power2.out" },
+            0.2 // Текст начинает появляться с легкой задержкой после картинки
+        );
+    }
+});
+
 // =======================================================
 // 10. ВОССТАНОВЛЕНИЕ ПРОЗРАЧНОСТИ ДЛЯ SAFARI (Кнопка "Назад")
 // =======================================================

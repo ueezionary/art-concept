@@ -2303,4 +2303,15 @@ html, body, a, button, input, [role="button"] {
         background-image: none !important;
         box-shadow: none !important;
     }
+
+    /* Когда меню открыто на любой странице (даже light), кнопка закрытия и всё внутри шапки — строго белые */
+    body.menu-open .header .burger-btn::after,
+    body.menu-open .header.header--light .burger-btn::after {
+        color: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+    }
+    
+    body.menu-open .header.header--light .header-monogram path {
+        fill: #FFFFFF !important;
+    }
 }

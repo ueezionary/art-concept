@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЖК ВТБ Арена Парк | Архитектурное бюро</title>
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body style="background-color: var(--bg-light);">
+
+    <!-- ШАПКА -->
+    <header class="header header--light">
+        <nav class="header-nav">
+            <a href="portfolio.html">ПРОЕКТЫ</a>
+            <a href="services.html">УСЛУГИ</a>
+            <a href="studio.html">БЮРО</a>
+        </nav>
+        
+        <div class="header-logo-wrap">
+            <a href="index.html">
+                <svg class="header-monogram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.6 265.7">
+                    <path d="M100,151.1c-.5-8.1-7.2-14.5-15.4-14.5v-2.4h107.8l20.8,60.9h28.7L175.4,3.6h-52.4L57.2,195.2h27.8l15-44.1ZM141.6,22.1h14.6c8.9,32.6,19.7,62.2,29.8,91.7h-74c9.9-29.5,20.9-59.1,29.5-91.7Z"/>
+                    <path d="M263.7,221.7v16.1H34.4v-16.1h-8v41.8h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1s229.3,0,229.3,0v19.1h8v-12.5h0c-.2-3.2-2.8-5.7-6-5.7v-.9h6.1v-22.7h-8Z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="header-action">
+            <a href="contacts.html">СВЯЗАТЬСЯ</a>
+        </div>
+    </header>
+
+    <!-- 1. ПОЛНОЭКРАННАЯ ОБЛОЖКА -->
+    <section class="el-fullscreen-hero">
+        <div class="el-hero-bg">
+            <img src="vtb-arena.jpg" alt="Обложка проекта">
+            <div class="el-hero-overlay"></div>
+        </div>
+        <div class="el-hero-content-center">
+            <h1 class="el-project-title">ЖК ВТБ АРЕНА ПАРК</h1>
+        </div>
+    </section>
+
+    <!-- 2. МЕТАДАННЫЕ И ОПИСАНИЕ -->
+    <section class="el-project-hero">
+        <div class="el-hero-meta-row">
+            <div class="el-meta-group">
+                <div class="el-meta-col">
+                    <span class="el-meta-label">TYPE</span>
+                    <span class="el-meta-val">Residential</span>
+                </div>
+                <div class="el-meta-col">
+                    <span class="el-meta-label">LOCATION</span>
+                    <span class="el-meta-val">Moscow, Russia</span>
+                </div>
+            </div>
+            <div class="el-hero-desc-right">
+                <p>Создание гармоничного интерьера для динамичной жизни в мегаполисе. Фокус на чистые линии, благородный шпон и скрытые детали.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ТО САМОЕ ЖУРНАЛЬНОЕ РАСПОЛОЖЕНИЕ (БОЛЬШОЕ ФОТО + ВЕРТИКАЛЬНОЕ РЯДОМ) -->
+    <section class="el-magazine-gallery">
+        
+        <!-- БЛОК 1: Огромное горизонтальное слева, вертикальное справа (как на скриншоте референса) -->
+        <div class="el-elicyon-block">
+            <div class="el-huge-img">
+                <img src="vtb-arena-1.jpg" alt="Фото 1">
+            </div>
+            <div class="el-side-vertical-img">
+                <img src="vtb-arena-2.jpg" alt="Фото 2">
+            </div>
+        </div>
+
+        <!-- Текстовая врезка для воздуха -->
+        <div class="el-magazine-text-block">
+            <p>Пространство спроектировано с учетом принципов текучей эргономики. Каждый ракурс формирует целостную визуальную историю.</p>
+        </div>
+
+        <!-- БЛОК 2: Зеркальный или сбалансированный ритм (Вертикальное слева, огромное горизонтальное справа) -->
+        <div class="el-elicyon-block el-block-reverse">
+            <div class="el-side-vertical-img">
+                <img src="vtb-arena-3.jpg" alt="Фото 3">
+            </div>
+            <div class="el-huge-img">
+                <img src="vtb-arena-4.jpg" alt="Фото 4">
+            </div>
+        </div>
+
+        <!-- БЛОК 3: Финальная пара (Большое + Вертикальное) -->
+        <div class="el-elicyon-block">
+            <div class="el-huge-img">
+                <img src="vtb-arena-5.jpg" alt="Фото 5">
+            </div>
+            <div class="el-side-vertical-img">
+                <img src="vtb-arena-6.jpg" alt="Фото 6">
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>

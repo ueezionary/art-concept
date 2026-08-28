@@ -162,6 +162,8 @@ body.locked {
 }
 
 
+
+
 /* =======================================================
    4. ГЛАВНЫЙ ЭКРАН (HERO)
 ======================================================= */
@@ -1855,4 +1857,228 @@ html, body, a, button, input, [role="button"] {
     /* Точный перевод в синий цвет #4d586c */
     filter: invert(33%) sepia(18%) saturate(928%) hue-rotate(182deg) brightness(95%) contrast(88%) !important;
     transform: translateY(-2px) scale(1.02) !important;
+}
+
+/* =======================================================
+   10. ТОЧНЫЙ ЖУРНАЛЬНЫЙ СТИЛЬ ELICYON (ОГРОМНЫЕ ФОТО)
+   ======================================================= */
+
+.el-fullscreen-hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.el-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.el-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.el-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25); 
+}
+
+.el-hero-content-center {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 4vw;
+}
+
+.el-fullscreen-hero .el-project-title {
+    color: #ffffff !important;
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 5.5vw, 6rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.el-project-hero {
+    padding: 8vh 6vw 4vh;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.el-hero-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: none; 
+    padding-top: 0;
+}
+
+.el-meta-group {
+    display: flex;
+    gap: 60px;
+}
+
+.el-meta-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.el-meta-label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.4;
+}
+
+.el-meta-val {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* СТРОГО 14px И ПЛОТНЫЙ МЕЖСТРОЧНИК */
+.el-hero-desc-right,
+.el-hero-desc-right p,
+.el-magazine-text-block,
+.el-magazine-text-block p {
+    font-family: var(--font-sans, sans-serif) !important;
+    font-size: 14px !important;
+    font-weight: 300 !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.02em !important;
+    opacity: 0.8;
+}
+
+.el-hero-desc-right {
+    max-width: 400px;
+}
+
+/* ЖУРНАЛЬНАЯ ГАЛЕРЕЯ (ОГРОМНОЕ ГОРИЗОНТАЛЬНОЕ + ВЕРТИКАЛЬНОЕ РЯДОМ) */
+.el-magazine-gallery {
+    padding: 6vh 6vw 18vh;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16vh; /* Воздух между блоками */
+}
+
+.el-elicyon-block {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr; /* <--- Вот это соотношение ширины колонок! Увеличь левую (было 1.4fr, поставь 1.6fr или 1.8fr) */
+    gap: 4vw;
+    align-items: center;
+}
+
+.el-block-reverse {
+    grid-template-columns: 1fr 1.4fr; /* Зеркальный блок */
+}
+
+.el-huge-img {
+    width: 100%;
+    aspect-ratio: 16 / 10; /* <--- Сделай цифру после слэша меньше (было 16 / 11 или 4/3) — фото станет ЖИРНЕЕ и ВЫШЕ на весь экран! */
+    overflow: hidden;
+    background-color: #e5e3df;
+}
+
+.el-side-vertical-img {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* <--- Вертикальное фото справа. Хочешь еще крупнее — сделай 4 / 5 или 2 / 3 */
+    overflow: hidden;
+    background-color: #e5e3df;
+}
+
+.el-huge-img img,
+.el-side-vertical-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.el-huge-img:hover img,
+.el-side-vertical-img:hover img {
+    transform: scale(1.02);
+}
+
+.el-magazine-text-block {
+    max-width: 550px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* =======================================================
+   11. ГЛОБАЛЬНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ТЕЛЕФОНЫ ДО 768px)
+======================================================= */
+@media (max-width: 768px) {
+
+    /* --- ШАПКА --- */
+    .header { padding: 15px 4vw; }
+    .header-nav { display: none; } /* Прячем основное меню на мобилке (оставляем лого и "Связаться") */
+
+    /* --- ГЛАВНАЯ: ПРОЕКТЫ --- */
+    .projects-wide { padding: 60px 4vw; margin-top: -10vh; }
+    .projects-grid-layout { flex-direction: column; gap: 40px; }
+    .projects-col-left, .projects-col-right { flex: auto; max-width: 100%; text-align: center; align-items: center; }
+    .projects-visuals-center { flex-direction: column; gap: 20px; }
+    .proj-card { width: 100%; aspect-ratio: 4/5; transform: none !important; } /* Убиваем ступеньки */
+    .projects-title { text-align: center; }
+    .projects-title .title-line-1, .projects-title .title-line-2 { align-self: center; margin: 0; }
+
+    /* --- ГЛАВНАЯ: СПЛИТ-БЛОКИ (50/50) --- */
+    .split-teaser, .split-teaser.reverse { flex-direction: column !important; min-height: auto; }
+    .split-image-col { width: 100% !important; flex: auto !important; height: 60vh; }
+    .split-text-col { width: 100% !important; flex: auto !important; padding: 60px 5vw; }
+
+    /* --- УСЛУГИ: КОМПАКТНЫЕ БЛОКИ --- */
+    .service-compact-section, 
+    .service-compact-section.reverse { flex-direction: column !important; height: auto !important; min-height: auto; }
+    .compact-media { width: 100%; height: 50vh; position: relative; }
+    .compact-content { width: 100%; padding: 60px 5vw; }
+
+    /* --- СТРАНИЦА ПРОЕКТА (ELICYON) --- */
+    .el-project-hero { padding: 40px 5vw; }
+    .el-hero-meta-row { flex-direction: column; gap: 30px; }
+    .el-meta-group { flex-direction: column; gap: 15px; }
+    .el-magazine-gallery { padding: 40px 5vw 80px; gap: 60px; }
+    .el-elicyon-block, .el-block-reverse { grid-template-columns: 1fr; gap: 20px; }
+    
+    /* --- СТУДИЯ (О БЮРО) --- */
+    .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+    .awards-logos-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 30px 10px !important; margin-top: 60px !important; }
+    .logos-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    
+    /* --- ФУТЕР --- */
+    .footer-cinematic { padding: 60px 5vw 30px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .footer-form, .footer-nav-col, .footer-contacts-col { align-items: center; max-width: 100%; }
+    .footer-nav-col { flex-direction: column; gap: 20px; }
+    .footer-submit-btn { align-self: center; }
+    .footer-bottom-line { flex-direction: column; gap: 15px; text-align: center; }
 }

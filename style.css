@@ -808,9 +808,11 @@ body.locked {
    8. СТРАНИЦА ПОРТФОЛИО (ИДЕАЛЬНО ДЛЯ 2K МОНИТОРОВ)
 ======================================================= */
 .portfolio-header-section {
-    padding: 18vh 3vw 2.5vh; /* 3vw строго как у шапки */
-    width: 100%;
-    box-sizing: border-box;
+    padding: 15vh 4vw 4vh; /* Ровная линия 4vw слева и справа */
+}
+
+.portfolio-gallery-section {
+    padding: 0 4vw; /* Точное совпадение с шапкой */
 }
 
 .portfolio-main-title {
@@ -824,7 +826,7 @@ body.locked {
     margin-bottom: 9vh;
 }
 
-/* Тулбар: привязан строго к сетке фото */
+/* Тулбар: привязан строго к левой линейке */
 .portfolio-toolbar {
     display: flex;
     justify-content: space-between;
@@ -833,7 +835,6 @@ body.locked {
     padding-bottom: 2vh;
 }
 
-/* Двухэтажный блок категорий */
 .filter-wrapper {
     display: flex;
     flex-direction: column;
@@ -843,9 +844,9 @@ body.locked {
 
 .filter-sublabel {
     font-family: var(--font-sans);
-    font-size: 14px;         /* Размер совпадает с подписями карточек */
-    font-weight: 200;        /* Минимальная толщина */
-    letter-spacing: 2px;     /* Просторный межбуквенный интервал */
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: #000000;
 }
@@ -853,30 +854,31 @@ body.locked {
 .filter-buttons {
     display: flex;
     align-items: baseline;
-    gap: clamp(24px, 2.5vw, 48px); /* Идеальный шаг для 2K */
+    gap: clamp(24px, 2.5vw, 48px);
 }
 
 .filter-btn {
     background: none;
     border: none;
     font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 1.5vw, 1.9rem); /* Выразительный размер под 2K */
+    font-size: clamp(1.3rem, 1.5vw, 1.9rem);
     font-weight: 300;
     letter-spacing: 0.8px;
     color: #A0A0A0;
     cursor: pointer;
     padding: 0;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, opacity 0.3s ease;
     text-transform: uppercase;
     line-height: 1;
+    opacity: 0.4;
 }
 
 .filter-btn.active, 
 .filter-btn:hover {
     color: var(--text-dark);
+    opacity: 1;
 }
 
-/* Иконки переключения сетки справа */
 .grid-switcher {
     display: flex;
     gap: 14px;
@@ -896,97 +898,82 @@ body.locked {
     color: var(--text-dark);
 }
 
-/* --- СЕТКА ГАЛЕРЕИ (ТЯНЕТСЯ НА ВЕСЬ 2K ЭКРАН) --- */
-.portfolio-gallery-section {
-    padding: 0 3vw 16vh; /* Строго 3vw слева и справа */
-    width: 100%;
-    box-sizing: border-box;
-}
-
+/* =======================================================
+   СЕТКА ПОРТФОЛИО (ШАХМАТНЫЙ ПОРЯДОК И ВОЗДУХ)
+======================================================= */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 4vw 1.2vw; /* Плотный люксовый зазор между фото */
+    /* 140px воздуха по вертикали между тройками, 1.5vw щели по горизонтали */
+    gap: 140px 1.5vw; 
     width: 100%;
+    align-items: start;
+    margin-bottom: 15vh;
 }
 
 .port-card {
-    display: flex;
-    flex-direction: column;
+    display: block;
     text-decoration: none;
+    color: inherit;
 }
+.port-card.wide { grid-column: span 6; }   /* Широкое фото (половина экрана) */
+.port-card.narrow { grid-column: span 3; } /* Узкое фото (четверть экрана) */
 
-.port-card.wide {
-    grid-column: span 6; /* 50% экрана */
-}
-
-.port-card.narrow {
-    grid-column: span 3; /* 25% экрана */
-}
-
+/* Пропорции фото — строго вертикальные */
 .port-img-wrap {
     width: 100%;
     overflow: hidden;
     background-color: #e5e3df;
-    position: relative;
-    margin-bottom: 1.6vh;
+    aspect-ratio: 4 / 5 !important;
 }
 
-.port-card.wide .port-img-wrap {
-    aspect-ratio: 16 / 10.5;
-}
-
-.port-card.narrow .port-img-wrap {
-    aspect-ratio: 4 / 5;
-}
-
-/* Монолитная статика без зума */
 .port-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s ease;
 }
 
-.port-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.04);
-    transition: background 0.4s ease;
+.port-card:hover .port-img-wrap img {
+    transform: scale(1.03);
 }
 
-.port-card:hover .port-overlay {
-    background: rgba(0, 0, 0, 0.12);
-}
-
-.port-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5vh;
-}
-
-/* Мелкая подпись (Город / Категория) */
+/* =======================================================
+   ТЕКСТ ПОД ФОТО (ТОНКИЙ ГАРАМОНД КАПСОМ)
+======================================================= */
 .port-category {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 200;
-    letter-spacing: 2px;
-    color: #777777;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-}
-
-/* Крупное название проекта */
-.port-name {
-    font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 1.7vw, 2.2rem); /* БЫЛО: 1.25rem — сделали заметно крупнее для 2K */
-    font-weight: 300;        /* Тонкое журнальное начертание Cormorant */
-    letter-spacing: 0.04em;  /* Легкая разрядка для премиального вида */
-    line-height: 1.1;
     color: var(--text-dark);
-    text-transform: uppercase;
-    margin: 0;
+    opacity: 0.5;
+    display: block;
+    margin-top: 15px;
 }
 
+.port-name {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif) !important;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-dark, #1a1a1a);
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* --- АДАПТИВ --- */
+@media (max-width: 992px) {
+    .port-card.wide { grid-column: span 12; }
+    .port-card.narrow { grid-column: span 6; }
+    .portfolio-grid { gap: 60px 4vw; }
+}
+@media (max-width: 600px) {
+    .port-card.narrow { grid-column: span 12; }
+}
 
 /* =======================================================
    9. КАСТОМНЫЙ КУРСОР С ИНВЕРСИЕЙ ЦВЕТА

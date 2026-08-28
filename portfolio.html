@@ -19,8 +19,6 @@
 </head>
 <body style="background-color: var(--bg-light);">
 
-    
-
     <!-- КАСТОМНЫЙ КУРСОР С ТЕКСТОМ -->
     <div class="custom-cursor" id="cursor">
         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,18 +49,17 @@
         </div>
     </header>
 
-    <!-- ЗАГОЛОВОК СТРАНИЦЫ И ФИЛЬТРЫ -->
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ И ФИЛЬТРЫ (ЖИЛЫЕ ПЕРВЫЕ И АКТИВНЫЕ) -->
     <section class="portfolio-header-section">
         <h1 class="portfolio-main-title">ПОРТФОЛИО ПРОЕКТОВ</h1>
         
-        <!-- ДВУХЭТАЖНЫЙ ТУЛБАР ELICYON -->
         <div class="portfolio-toolbar">
             <div class="filter-wrapper">
                 <span class="filter-sublabel">ФИЛЬТР ПРОЕКТОВ</span>
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="development">ИНВЕСТИЦИОННЫЕ</button>
-                    <button class="filter-btn" data-filter="residential">ЖИЛЫЕ</button>
+                    <button class="filter-btn active" data-filter="residential">ЖИЛЫЕ</button>
                     <button class="filter-btn" data-filter="commercial">КОММЕРЧЕСКИЕ</button>
+                    <button class="filter-btn" data-filter="development">ИНВЕСТИЦИОННЫЕ</button>
                 </div>
             </div>
             
@@ -77,43 +74,255 @@
         </div>
     </section>
 
-<!-- ГАЛЕРЕЯ (СЕТКА 6-3-3) -->
+    <!-- ГАЛЕРЕЯ -->
     <section class="portfolio-gallery-section">
         <div class="portfolio-grid">
             
-            <!-- Проект 1 (Широкий) -->
-            <a href="#" class="port-card wide" data-category="development">
-                <div class="port-img-wrap">
-                    <img src="showcase-1.jpg" alt="Dubai Penthouse">
-                    <div class="port-overlay"></div>
-                </div>
+            <!-- =======================================================
+               КАТЕГОРИЯ: ЖИЛЫЕ (С ЧЕТКИМ ШАХМАТНЫМ ПОРЯДКОМ)
+               ======================================================= -->
+
+            <!-- Ряд 1 (Крупное СЛЕВА) -->
+            <a href="project-vtb.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="vtb-arena.jpg" alt="ЖК ВТБ Арена Парк"></div>
                 <div class="port-info">
-                    <span class="port-category">ДУБАЙ &middot; ИНВЕСТИЦИОННЫЙ</span>
-                    <h3 class="port-name">АПАРТАМЕНТЫ ПЕНТХАУС</h3>
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 163 М&sup2;</span>
+                    <h3 class="port-name">ЖК ВТБ АРЕНА ПАРК</h3>
+                </div>
+            </a>
+            <a href="project-zemlya.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="zemlya-vozduh.jpg" alt="Земля и воздух"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 101 М&sup2;</span>
+                    <h3 class="port-name">ЗЕМЛЯ И ВОЗДУХ</h3>
+                </div>
+            </a>
+            <a href="project-kutuzov.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="kutuzov-grad.jpg" alt="ЖК Кутузов Град"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 103 М&sup2;</span>
+                    <h3 class="port-name">ЖК КУТУЗОВ ГРАД</h3>
                 </div>
             </a>
 
-            <!-- Проект 2 (Узкий) -->
-            <a href="#" class="port-card narrow" data-category="residential">
-                <div class="port-img-wrap">
-                    <img src="project-1.jpg" alt="Lancaster Residence">
-                    <div class="port-overlay"></div>
-                </div>
+            <!-- Ряд 2 (Крупное СПРАВА) -->
+            <a href="project-wellton.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="wellton.jpg" alt="ЖК Wellton Towers"></div>
                 <div class="port-info">
-                    <span class="port-category">ХАМОВНИКИ &middot; ЖИЛОЙ</span>
-                    <h3 class="port-name">РЕЗИДЕНЦИЯ ЛАНКАСТЕР</h3>
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 102 М&sup2;</span>
+                    <h3 class="port-name">ЖК WELLTON TOWERS</h3>
+                </div>
+            </a>
+            <a href="project-tiffany.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="tiffany.jpg" alt="Завтрак у Тиффани"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 127 М&sup2;</span>
+                    <h3 class="port-name">ЗАВТРАК У ТИФФАНИ</h3>
+                </div>
+            </a>
+            <a href="project-maslovo.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="maslovo.jpg" alt="Дом в КП Маслово"></div>
+                <div class="port-info">
+                    <span class="port-category">ЗАГОРОДНАЯ РЕЗИДЕНЦИЯ &middot; 410 М&sup2;</span>
+                    <h3 class="port-name">ДОМ В КП МАСЛОВО</h3>
                 </div>
             </a>
 
-            <!-- Проект 3 (Узкий) -->
-            <a href="#" class="port-card narrow" data-category="residential">
-                <div class="port-img-wrap">
-                    <img src="project-2.jpg" alt="Curzon Apartment">
-                    <div class="port-overlay"></div>
-                </div>
+            <!-- Ряд 3 (Крупное СЛЕВА) -->
+            <a href="project-simvol.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="simvol.jpg" alt="ЖК Символ"></div>
                 <div class="port-info">
-                    <span class="port-category">ПАТРИАРШИЕ &middot; ЖИЛОЙ</span>
-                    <h3 class="port-name">ОСОБНЯК НА КУРЗОН</h3>
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; МОСКВА</span>
+                    <h3 class="port-name">ЖК СИМВОЛ</h3>
+                </div>
+            </a>
+            <a href="project-oko.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="oko.jpg" alt="Квартира в Сити ОКО"></div>
+                <div class="port-info">
+                    <span class="port-category">АПАРТАМЕНТЫ &middot; 140 М&sup2;</span>
+                    <h3 class="port-name">СИТИ ОКО</h3>
+                </div>
+            </a>
+            <a href="project-hyde.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="hyde-park.jpg" alt="ЖК Хайд Парк"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; МОСКВА</span>
+                    <h3 class="port-name">ЖК ХАЙД ПАРК</h3>
+                </div>
+            </a>
+
+            <!-- Ряд 4 (Крупное СПРАВА) -->
+            <a href="project-sovremennyi.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="sovremennyi-min.jpg" alt="Современный минимализм"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 163 М&sup2;</span>
+                    <h3 class="port-name">СОВРЕМЕННЫЙ МИНИМАЛИЗМ</h3>
+                </div>
+            </a>
+            <a href="project-elegant.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="elegant-min.jpg" alt="Элегантный минимализм"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 140 М&sup2;</span>
+                    <h3 class="port-name">ЭЛЕГАНТНЫЙ МИНИМАЛИЗМ</h3>
+                </div>
+            </a>
+            <a href="project-autumn-ny.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="autumn-ny.jpg" alt="Осень в Нью-Йорке"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 101 М&sup2;</span>
+                    <h3 class="port-name">ОСЕНЬ В НЬЮ-ЙОРКЕ</h3>
+                </div>
+            </a>
+
+            <!-- Ряд 5 (Крупное СЛЕВА) -->
+            <a href="project-krekshino-226.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="krekshino-226.jpg" alt="Дом 226 в КП Крекшино"></div>
+                <div class="port-info">
+                    <span class="port-category">ЗАГОРОДНАЯ РЕЗИДЕНЦИЯ &middot; 292 М&sup2;</span>
+                    <h3 class="port-name">ДОМ 226 В КП КРЕКШИНО</h3>
+                </div>
+            </a>
+            <a href="project-krekshino-84.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="krekshino-84.jpg" alt="Дом 84 в КП Крекшино"></div>
+                <div class="port-info">
+                    <span class="port-category">ЗАГОРОДНАЯ РЕЗИДЕНЦИЯ &middot; 216 М&sup2;</span>
+                    <h3 class="port-name">ДОМ 84 В КП КРЕКШИНО</h3>
+                </div>
+            </a>
+            <a href="project-primavera.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="primavera.jpg" alt="Квартира в ЖК Примавера"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; МОСКВА</span>
+                    <h3 class="port-name">КВАРТИРА В ЖК ПРИМАВЕРА</h3>
+                </div>
+            </a>
+
+            <!-- Ряд 6 (Крупное СПРАВА) -->
+            <a href="project-vozdushnoe.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="vozdushnoe.jpg" alt="Воздушное настроение"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 76 М&sup2;</span>
+                    <h3 class="port-name">ВОЗДУШНОЕ НАСТРОЕНИЕ</h3>
+                </div>
+            </a>
+            <a href="project-dyhanie.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="dyhanie.jpg" alt="Дыхание природы"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 117 М&sup2;</span>
+                    <h3 class="port-name">ДЫХАНИЕ ПРИРОДЫ</h3>
+                </div>
+            </a>
+            <a href="project-malachite.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="malachite.jpg" alt="Малахит и Марсала"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 174 М&sup2;</span>
+                    <h3 class="port-name">МАЛАХИТ И МАРСАЛА</h3>
+                </div>
+            </a>
+
+            <!-- Ряд 7 (Крупное СЛЕВА) -->
+            <a href="project-klimt.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="klimt.jpg" alt="Феерия Густава Климта"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 201 М&sup2;</span>
+                    <h3 class="port-name">ФЕЕРИЯ ГУСТАВА КЛИМТА</h3>
+                </div>
+            </a>
+            <a href="project-scandi.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="scandi.jpg" alt="Стильный сканди"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 146 М&sup2;</span>
+                    <h3 class="port-name">СТИЛЬНЫЙ СКАНДИ</h3>
+                </div>
+            </a>
+            <a href="project-holland.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="holland.jpg" alt="Голландский флер"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 73 М&sup2;</span>
+                    <h3 class="port-name">ГОЛЛАНДСКИЙ ФЛЕР</h3>
+                </div>
+            </a>
+
+            <!-- Ряд 8 (Крупное СПРАВА) -->
+            <a href="project-vorontsovsky.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="vorontsovsky.jpg" alt="ЖК Воронцовский Парк"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; МОСКВА</span>
+                    <h3 class="port-name">ЖК ВОРОНЦОВСКИЙ ПАРК</h3>
+                </div>
+            </a>
+            <a href="project-vremena.html" class="port-card narrow" data-category="residential">
+                <div class="port-img-wrap"><img src="vremena.jpg" alt="Времена года"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 66 М&sup2;</span>
+                    <h3 class="port-name">ВРЕМЕНА ГОДА</h3>
+                </div>
+            </a>
+            <a href="project-west.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="west-garden.jpg" alt="ЖК Вест Гарден"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; МОСКВА</span>
+                    <h3 class="port-name">ЖК ВЕСТ ГАРДЕН</h3>
+                </div>
+            </a>
+
+            <a href="project-preobrazhenie.html" class="port-card wide" data-category="residential">
+                <div class="port-img-wrap"><img src="preobrazhenie.jpg" alt="Преображение"></div>
+                <div class="port-info">
+                    <span class="port-category">ЖИЛОЙ ИНТЕРЬЕР &middot; 70 М&sup2;</span>
+                    <h3 class="port-name">ПРЕОБРАЖЕНИЕ</h3>
+                </div>
+            </a>
+
+
+            <!-- =======================================================
+               КАТЕГОРИЯ: КОММЕРЧЕСКИЕ (Всего 3 проекта -> Ровно 1 ряд)
+               ======================================================= -->
+            <a href="project-grass.html" class="port-card narrow" data-category="commercial">
+                <div class="port-img-wrap"><img src="grass.jpg" alt="Офис GRASS"></div>
+                <div class="port-info">
+                    <span class="port-category">КОММЕРЧЕСКИЙ ПРОЕКТ &middot; 500 М&sup2;</span>
+                    <h3 class="port-name">ОФИС КОМПАНИИ GRASS</h3>
+                </div>
+            </a>
+            <a href="project-garage.html" class="port-card narrow" data-category="commercial">
+                <div class="port-img-wrap"><img src="garage.jpg" alt="Частный гараж"></div>
+                <div class="port-info">
+                    <span class="port-category">ЧАСТНЫЙ ПРОЕКТ &middot; 300 М&sup2;</span>
+                    <h3 class="port-name">ЧАСТНЫЙ ГАРАЖ</h3>
+                </div>
+            </a>
+            <a href="project-angiopharm.html" class="port-card wide" data-category="commercial">
+                <div class="port-img-wrap"><img src="angiopharm.jpg" alt="Офис ANGIOPHARM"></div>
+                <div class="port-info">
+                    <span class="port-category">КОММЕРЧЕСКИЙ ПРОЕКТ &middot; 257 М&sup2;</span>
+                    <h3 class="port-name">ОФИС КОМПАНИИ ANGIOPHARM</h3>
+                </div>
+            </a>
+
+
+            <!-- =======================================================
+               КАТЕГОРИЯ: ИНВЕСТИЦИОННЫЕ (Всего 3 проекта -> Ровно 1 ряд)
+               ======================================================= -->
+            <a href="project-graphics.html" class="port-card narrow" data-category="development">
+                <div class="port-img-wrap"><img src="graphics.jpg" alt="Графика и стиль"></div>
+                <div class="port-info">
+                    <span class="port-category">ИНВЕСТИЦИОННЫЙ ПРОЕКТ &middot; 50 М&sup2;</span>
+                    <h3 class="port-name">ГРАФИКА И СТИЛЬ</h3>
+                </div>
+            </a>
+            <a href="project-artdeco.html" class="port-card narrow" data-category="development">
+                <div class="port-img-wrap"><img src="artdeco.jpg" alt="Современное Арт-деко"></div>
+                <div class="port-info">
+                    <span class="port-category">ИНВЕСТИЦИОННЫЙ ПРОЕКТ &middot; 27 М&sup2;</span>
+                    <h3 class="port-name">СОВРЕМЕННОЕ АРТ-ДЕКО</h3>
+                </div>
+            </a>
+            <a href="project-autumn-colors.html" class="port-card wide" data-category="development">
+                <div class="port-img-wrap"><img src="autumn-colors.jpg" alt="Осенние краски"></div>
+                <div class="port-info">
+                    <span class="port-category">ИНВЕСТИЦИОННЫЙ ПРОЕКТ &middot; 49 М&sup2;</span>
+                    <h3 class="port-name">ОСЕННИЕ КРАСКИ</h3>
                 </div>
             </a>
 

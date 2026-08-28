@@ -269,3 +269,43 @@ window.addEventListener('pageshow', (event) => {
         gsap.set(document.body, { opacity: 1 });
     }
 });
+
+/* =======================================================
+   ФИЛЬТР ПРОЕКТОВ В ПОРТФОЛИО
+   ======================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const portfolioCards = document.querySelectorAll(".port-card");
+
+    if (filterButtons.length > 0 && portfolioCards.length > 0) {
+        
+        // Функция фильтрации
+        function filterProjects(category) {
+            portfolioCards.forEach(card => {
+                if (card.getAttribute("data-category") === category) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // При загрузке страницы находим активную кнопку и фильтруем по ней сразу
+        const activeButton = document.querySelector(".filter-btn.active");
+        if (activeButton) {
+            filterProjects(activeButton.getAttribute("data-filter"));
+        }
+
+        // Обработка кликов по кнопкам
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Убираем активный класс у всех
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                // Даем активный класс нажатой
+                button.classList.add("active");
+                // Фильтруем
+                filterProjects(button.getAttribute("data-filter"));
+            });
+        });
+    }
+});

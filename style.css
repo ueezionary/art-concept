@@ -2034,51 +2034,70 @@ html, body, a, button, input, [role="button"] {
 }
 
 /* =======================================================
-   11. ГЛОБАЛЬНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ТЕЛЕФОНЫ ДО 768px)
+   11. БРОНЕБОЙНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 768px)
 ======================================================= */
 @media (max-width: 768px) {
 
+    /* --- БАЗОВЫЕ ОТСТУПЫ --- */
+    body { overflow-x: hidden !important; }
+    
     /* --- ШАПКА --- */
-    .header { padding: 15px 4vw; }
-    .header-nav { display: none; } /* Прячем основное меню на мобилке (оставляем лого и "Связаться") */
+    .header { padding: 15px 5vw !important; }
+    .header-nav { display: none !important; } /* Прячем меню, оставляем лого и кнопку */
 
-    /* --- ГЛАВНАЯ: ПРОЕКТЫ --- */
-    .projects-wide { padding: 60px 4vw; margin-top: -10vh; }
-    .projects-grid-layout { flex-direction: column; gap: 40px; }
-    .projects-col-left, .projects-col-right { flex: auto; max-width: 100%; text-align: center; align-items: center; }
-    .projects-visuals-center { flex-direction: column; gap: 20px; }
-    .proj-card { width: 100%; aspect-ratio: 4/5; transform: none !important; } /* Убиваем ступеньки */
-    .projects-title { text-align: center; }
-    .projects-title .title-line-1, .projects-title .title-line-2 { align-self: center; margin: 0; }
+    /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+    .hero-logo-svg { width: 85vw !important; max-width: 300px !important; }
 
-    /* --- ГЛАВНАЯ: СПЛИТ-БЛОКИ (50/50) --- */
-    .split-teaser, .split-teaser.reverse { flex-direction: column !important; min-height: auto; }
-    .split-image-col { width: 100% !important; flex: auto !important; height: 60vh; }
-    .split-text-col { width: 100% !important; flex: auto !important; padding: 60px 5vw; }
+    /* --- ФИЛОСОФИЯ (ЖУРНАЛЬНЫЙ ТЕКСТ С КАРТИНКАМИ) --- */
+    .editorial-flow-section { height: auto !important; padding: 10vh 0 !important; }
+    .editorial-sticky-overlay { position: relative !important; height: auto !important; }
+    .phrase-container { position: relative !important; padding: 0 5vw !important; text-align: center !important; }
+    /* Разрешаем тексту переноситься на новые строки */
+    .statement-row { white-space: normal !important; font-size: 24px !important; line-height: 1.4 !important; }
+    /* Прячем летающие картинки на телефоне, чтобы был чистый текст */
+    .editorial-images-scatter { display: none !important; } 
 
-    /* --- УСЛУГИ: КОМПАКТНЫЕ БЛОКИ --- */
-    .service-compact-section, 
-    .service-compact-section.reverse { flex-direction: column !important; height: auto !important; min-height: auto; }
-    .compact-media { width: 100%; height: 50vh; position: relative; }
-    .compact-content { width: 100%; padding: 60px 5vw; }
+    /* --- ГЛАВНАЯ: ТРИ ПРОЕКТА --- */
+    .projects-wide { padding: 60px 5vw !important; margin-top: 0 !important; }
+    .projects-grid-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
+    .projects-col-left, .projects-col-right { width: 100% !important; flex: none !important; padding: 0 !important; text-align: left !important; }
+    .projects-title { font-size: 3rem !important; }
+    .projects-title .title-line-2 { margin-left: 0 !important; }
+    .projects-visuals-center { display: flex !important; flex-direction: column !important; width: 100% !important; gap: 20px !important; }
+    .proj-card { width: 100% !important; aspect-ratio: 4/5 !important; transform: none !important; margin: 0 !important; } /* Убиваем ступеньки */
 
-    /* --- СТРАНИЦА ПРОЕКТА (ELICYON) --- */
-    .el-project-hero { padding: 40px 5vw; }
-    .el-hero-meta-row { flex-direction: column; gap: 30px; }
-    .el-meta-group { flex-direction: column; gap: 15px; }
-    .el-magazine-gallery { padding: 40px 5vw 80px; gap: 60px; }
-    .el-elicyon-block, .el-block-reverse { grid-template-columns: 1fr; gap: 20px; }
-    
-    /* --- СТУДИЯ (О БЮРО) --- */
-    .founder-grid { grid-template-columns: 1fr; gap: 40px; }
-    .awards-logos-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 30px 10px !important; margin-top: 60px !important; }
-    .logos-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    
-    /* --- ФУТЕР --- */
-    .footer-cinematic { padding: 60px 5vw 30px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
-    .footer-form, .footer-nav-col, .footer-contacts-col { align-items: center; max-width: 100%; }
-    .footer-nav-col { flex-direction: column; gap: 20px; }
-    .footer-submit-btn { align-self: center; }
-    .footer-bottom-line { flex-direction: column; gap: 15px; text-align: center; }
+    /* --- СПЛИТ-БЛОКИ (ДИЗАЙН ИНТЕРЬЕРА И Т.Д.) --- */
+    .split-teaser, .split-teaser.reverse { display: flex !important; flex-direction: column !important; min-height: auto !important; height: auto !important; }
+    .split-image-col { width: 100% !important; flex: none !important; height: 50vh !important; }
+    .split-text-col { width: 100% !important; flex: none !important; padding: 60px 5vw !important; align-items: flex-start !important; text-align: left !important; }
+    .split-title { font-size: 2.2rem !important; line-height: 1.1 !important; text-align: left !important; word-wrap: break-word !important; hyphens: auto; }
+    .split-mini-img { width: 50vw !important; margin-bottom: 30px !important; }
+
+    /* --- УСЛУГИ: КОМПАКТНЫЕ БЛОКИ (КОНСУЛЬТАЦИЯ) --- */
+    .service-compact-section, .service-compact-section.reverse { display: flex !important; flex-direction: column !important; height: auto !important; min-height: auto !important; }
+    .compact-media { width: 100% !important; height: 40vh !important; flex: none !important; }
+    .compact-content { width: 100% !important; flex: none !important; padding: 50px 5vw !important; }
+    .compact-title { font-size: 2.2rem !important; word-wrap: break-word !important; hyphens: auto; }
+    /* Строка цены и ссылки друг под другом */
+    .compact-action-row { flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
+
+    /* --- СТУДИЯ (АЛЁНА ВОЛКОВА И НАГРАДЫ) --- */
+    .founder-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
+    .founder-name { font-size: 3rem !important; line-height: 1 !important; word-wrap: break-word; }
+    /* Вытягиваем фото основателя на всю ширину */
+    .founder-portrait-wrap { width: 100% !important; max-width: 100% !important; margin-top: 20px !important; display: block !important; }
+    /* Награды в 2 колонки */
+    .awards-logos-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 30px 15px !important; padding: 0 5vw !important; margin-top: 60px !important; width: 100% !important; left: 0 !important; margin-left: 0 !important; }
+    .award-logo-item img { max-width: 100% !important; height: auto !important; }
+
+    /* --- ФУТЕР И ФОРМА --- */
+    .footer-cinematic { padding: 60px 5vw 40px !important; }
+    .footer-grid { display: flex !important; flex-direction: column !important; gap: 50px !important; align-items: flex-start !important; }
+    .footer-newsletter-title { font-size: 2.2rem !important; line-height: 1.1 !important; word-wrap: break-word; }
+    .footer-form { width: 100% !important; max-width: 100% !important; }
+    /* Имя и Телефон друг под другом */
+    .form-row { display: flex !important; flex-direction: column !important; gap: 30px !important; }
+    .input-group { width: 100% !important; }
+    .footer-submit-btn { margin-top: 10px !important; }
+    .footer-bottom-line { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
 }

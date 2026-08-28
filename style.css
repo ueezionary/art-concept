@@ -2193,3 +2193,105 @@ html, body, a, button, input, [role="button"] {
     .projects-title { font-size: 2.8rem !important; line-height: 1 !important; }
     .split-title, .compact-title { font-size: 2.2rem !important; line-height: 1.1 !important; }
 }
+
+/* --- ИДЕАЛЬНЫЙ ФУТЕР БЕЗ МУСОРА --- */
+    .footer-cinematic {
+        padding: 50px 25px 30px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Скрываем текст под заголовком только на мобилках */
+    .footer-newsletter-desc {
+        display: none !important;
+    }
+    
+    .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        width: 100% !important;
+    }
+    
+    .footer-form-col {
+        width: 100% !important;
+        margin-bottom: 0 !important;
+    }
+
+/* 1. Делаем главный заголовок футера плотным, крупным и уверенным */
+    .footer-newsletter-title {
+        font-family: var(--font-serif, 'Cormorant Garamond', serif) !important;
+        font-size: 2.6rem !important;
+        font-weight: 500 !important; /* Увеличили толщину, чтобы он не был хлипким */
+        line-height: 1.1 !important;
+        text-transform: uppercase !important;
+        margin-bottom: 25px !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Навигация: убираем линии, сдвигаем две колонки ближе друг к другу */
+    .footer-nav-col {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important; /* Прижимаем к левому краю, чтобы колонки шли ближе */
+        gap: 40px !important; /* Регулируй расстояние между колонками здесь */
+        border: none !important; /* Снесли беспонтовые линии */
+        padding: 10px 0 !important;
+        width: 100% !important;
+    }
+    
+    .footer-links-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .footer-links-group a {
+        font-size: 12px !important;
+        letter-spacing: 1px !important;
+        opacity: 0.9 !important;
+    }
+
+    /* Контакты */
+    .footer-contacts-col {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+    
+    .footer-contact-link {
+        font-size: 16px !important;
+        font-weight: 400 !important;
+    }
+
+    .footer-address {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        opacity: 0.8 !important;
+        margin-top: 5px !important;
+    }
+
+    /* Огромный логотип внизу */
+    .footer-huge-logo {
+        margin: 30px 0 15px !important;
+        width: 100% !important;
+        border: none !important; /* Убираем линию под логотипом, если она там была */
+    }
+
+    /* Нижняя строка (копирайт, ИП, политика) — тоже без линий */
+    .footer-bottom-line {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        text-align: left !important;
+        font-size: 11px !important;
+        opacity: 0.7 !important;
+        border: none !important; /* Снесли последнюю линию */
+        padding-top: 10px !important;
+        width: 100% !important;
+    }
+    
+    .footer-legal-inline {
+        display: block !important;
+    }

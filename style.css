@@ -2114,17 +2114,17 @@ html, body, a, button, input, [role="button"] {
     .mobile-menu-overlay::before { content: ''; display: block; width: 65px; height: 65px; background-image: url('favicon.svg'); background-size: contain; background-repeat: no-repeat; background-position: center; margin-bottom: 5vh !important; filter: brightness(0) invert(1) !important; flex-shrink: 0; }
 
     /* Пункты меню: крупно, тонко, близко друг к другу */
-    .mobile-nav { display: flex; flex-direction: column; gap: 15px !important; text-align: center; margin-bottom: 8vh !important; width: 100%; align-items: center; margin-top: 0 !important; }
-    .mobile-nav a { font-family: var(--font-serif, 'Cormorant Garamond', serif) !important; font-size: 4.5rem !important; font-weight: 300 !important; line-height: 1 !important; color: #FFFFFF !important; text-transform: uppercase; letter-spacing: -1px !important; }
+    .mobile-nav { display: flex; flex-direction: column; gap: 5px !important; text-align: center; margin-bottom: 8vh !important; width: 100%; align-items: center; margin-top: 0 !important; }
+    .mobile-nav a { font-family: var(--font-serif, 'Cormorant Garamond', serif) !important; font-size: 4rem !important; font-weight: 300 !important; line-height: 1 !important; color: #FFFFFF !important; text-transform: uppercase; letter-spacing: -1px !important; }
 
-    .mobile-menu-footer { display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 420px; margin-bottom: 10px !important; margin-top: 0 !important; }
-    .mobile-col { display: flex; flex-direction: column; gap: 10px; text-align: left; }
-    .mobile-col a { font-family: var(--font-sans) !important; font-size: 11px !important; color: #FFFFFF !important; text-transform: uppercase; letter-spacing: 1px; border: none !important; opacity: 0.9 !important; }
+    .mobile-menu-footer { display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 420px; margin-bottom: 40px !important; margin-top: 0 !important; }
+    .mobile-col { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+    .mobile-col a { font-family: var(--font-sans) !important; font-size: 13px !important; font-weight: 300; color: #FFFFFF !important; text-transform: uppercase; letter-spacing: 1px; border: none !important; opacity: 0.9 !important; }
     
     .mobile-copyright { font-family: var(--font-sans) !important; font-size: 10px !important; color: #FFFFFF !important; opacity: 0.6 !important; text-transform: uppercase; letter-spacing: 1px; text-align: left !important; width: 100%; max-width: 420px; margin-top: 10px !important; }
 
     /* --- 3. ФИЛОСОФИЯ - СТИКИ ТЕКСТ + 4 ФОТО ПО ДЛИНЕ СКРОЛЛА --- */
-    .editorial-flow-section { height: 300vh !important; display: block !important; padding: 0 !important; margin: 0 !important; position: relative !important; overflow: visible !important; }
+    .editorial-flow-section { height: 250vh !important; display: block !important; padding: 0 !important; margin: 0 !important; position: relative !important; overflow: visible !important; }
     
     /* Текст жестко залипает по центру экрана */
     .editorial-sticky-overlay { position: -webkit-sticky !important; position: sticky !important; top: 0 !important; height: 100vh !important; width: 100% !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; z-index: 10 !important; overflow: hidden !important; }
@@ -2136,12 +2136,11 @@ html, body, a, button, input, [role="button"] {
     .editorial-images-scatter { display: block !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; pointer-events: none !important; z-index: 1 !important; overflow: visible !important; }
     .scatter-item { position: absolute !important; display: block !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
     
-    .scatter-item.item-1 { top: 10% !important; right: 5vw !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
-    .scatter-item.item-2 { top: 35% !important; left: 5vw !important; width: 50vw !important; aspect-ratio: 16/10 !important; }
-    .scatter-item.item-3 { top: 60% !important; right: 8vw !important; width: 35vw !important; aspect-ratio: 4/5 !important; display: block !important; }
-    .scatter-item.item-4 { top: 85% !important; left: 10vw !important; width: 45vw !important; aspect-ratio: 3/4 !important; display: block !important; }
-    .scatter-item.item-5 { display: none !important; }
-
+.scatter-item.item-1 { top: 5% !important; right: 4vw !important; left: auto !important; width: 50vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-2 { top: 25% !important; left: 4vw !important; left: auto !important; width: 30vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-3 { top: 50% !important; right: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-4 { top: 75% !important; left: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-5 { top: 95% !important; left: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
     /* --- 4. БЮРО (АЛЁНА: ИДЕАЛЬНЫЙ ПОРЯДОК) --- */
     .founder-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
     

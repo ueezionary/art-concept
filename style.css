@@ -1329,169 +1329,296 @@ html, body, a, button, input, [role="button"] {
 }
 
 /* =======================================================
-   9. СТРАНИЦА КОНТАКТОВ (СТИЛЬ ELICYON)
-======================================================= */
+   9. СТРАНИЦА КОНТАКТОВ (АБСОЛЮТНЫЙ ЛЮКС)
+   ======================================================= */
+
+/* --- ПЕРВЫЙ ЭКРАН --- */
 .contact-hero-section {
     padding: 18vh 6vw 12vh;
-    background-color: #f4f1ea; /* Фирменный фоновый цвет */
+    background-color: var(--bg-light, #f4f1ea);
 }
 
 .contact-hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr; /* Ровные колонки 50/50 */
     gap: 8vw;
-    align-items: start; /* Возвращаем привязку к верху, но двигаем саму колонку */
-}
-
-/* Опускаем всю правую колонку с формой вниз на нужную высоту */
-.contact-hero-right {
-    margin-top: 25vh; /* <--- Увеличивай или уменьшай эту цифру, чтобы опустить форму ниже */
+    align-items: start;
 }
 
 .contact-hero-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 3.2vw, 4rem);
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.8rem, 3.6vw, 4.6rem);
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.08;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: #222;
+    color: var(--text-dark, #1a1a1a);
+    margin-bottom: 60px; /* Отступ до фотографии */
+}
+
+.offset-line {
+    display: inline-block;
+    padding-left: 1.5em;
+}
+
+/* Фотография слева */
+.contact-hero-image {
+    width: 100%;
+    max-width: 480px; /* Ограничиваем ширину, чтобы смотрелось аккуратно */
+    margin-left: 1.5em; /* Сдвигаем по уровню отступа текста */
+}
+
+.contact-hero-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5; /* Журнальная пропорция */
+    object-fit: cover;
+    display: block;
+}
+
+/* Форма справа */
+.contact-hero-right {
+    margin-top: 25vh; /* Сдвигаем форму вниз для баланса */
 }
 
 .contact-main-form {
-    gap: 4vh;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
-/* Цвет инпутов и текста для формы на странице контактов */
+/* --- Исправление цвета чекбокса и линии кнопки для светлого фона --- */
+.contact-main-form .checkbox-box {
+    border-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.contact-main-form input:checked ~ .checkbox-box {
+    background-color: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+}
+
+/* Линия подчеркивания под кнопкой */
+.contact-main-form .projects-link-underline::after {
+    background-color: #1a1a1a !important;
+}
+
 .contact-main-form input {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+    padding: 15px 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 13px; /* Строго не меньше 13px */
+    font-weight: 300;
+    letter-spacing: 0.1em;
     color: #1a1a1a !important;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
 .contact-main-form input::placeholder {
     color: rgba(0, 0, 0, 0.4) !important;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
 }
 
 .contact-main-form input:focus {
     border-bottom-color: #1a1a1a !important;
 }
 
-.contact-main-form .checkbox-box {
-    border: 1px solid rgba(0, 0, 0, 0.3) !important;
-}
-
-.contact-main-form input:checked ~ .checkbox-box {
-    background-color: #1a1a1a !important;
-}
-
 .contact-main-form .checkbox-label {
-    color: rgba(0, 0, 0, 0.75) !important;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .contact-main-form .footer-submit-btn {
+    font-size: 13px;
+    font-weight: 400; /* Не жирный */
+    letter-spacing: 0.1em;
     color: #1a1a1a !important;
+    margin-top: 20px;
+    align-self: flex-start;
 }
 
-.contact-main-form .footer-submit-btn::after {
-    background-color: #1a1a1a !important;
-}
-
-/* Сплит блок с почтами (Синий / Бежевый) */
-.contact-split-info {
+/* --- СПЛИТ-БЛОК --- */
+.contacts-split-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
 }
 
-.contact-split-box {
-    padding: 12vh 6vw;
+.contacts-col {
+    padding: 15vh 4vw;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Выравниваем всё по центру горизонтали */
-    text-align: center;   /* Текст тоже по центру */
-    gap: 5vh;
-}
-.blue-side {
-    background-color: #353030;
-    color: #FFFFFF;
-}
-
-.beige-side {
-    background-color: #eae5dc;
-    color: #222222;
-}
-
-.contact-box-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 2.5vw, 3rem);
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-}
-
-.contact-info-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрируем блоки с почтами и телефонами */
-    gap: 6px;
-}
-
-.contact-city-label {
-    font-family: var(--font-sans);
-    font-size: 9px;
-    letter-spacing: 2px;
-    opacity: 0.6;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-}
-
-.contact-split-box a {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: opacity 0.3s;
-}
-
-.blue-side a { color: #FFFFFF; }
-.beige-side a { color: #222222; }
-.contact-split-box a:hover { opacity: 0.7; }
-
-.press-preview-card img {
-    width: 180px;
-    height: auto;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-.contact-location-section {
-    display: grid;
-    grid-template-columns: 1fr 2fr; /* Левая колонка уже, правая (карта) в два раза шире */
-    background-color: #f4f1ea;
-    padding: 12vh 6vw;
+    justify-content: center;
     align-items: center;
-    gap: 4vw;
 }
 
-.location-text-col {
-    padding-left: 4vw;
-}
-
-.location-map-col {
+.contacts-col-inner {
     width: 100%;
-    height: 500px; /* Высота блока карты */
+    max-width: 420px; /* Сделали контейнер чуть шире для крупных шрифтов */
 }
 
-.location-map-col iframe {
-    width: 100% !important;
-    height: 100% !important;
+.contacts-dark-col {
+    background-color: #2b2827;
+    color: #ffffff;
+}
+
+.contacts-light-col {
+    background-color: #eae5dc;
+    color: #1a1a1a;
+}
+
+.contact-main-title {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(34px, 3.8vw, 50px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Много премиального воздуха между блоками */
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Элегантные, тонкие подписи */
+.contact-mini-label {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.4;
+}
+
+/* Крупный телефон без засечек (в едином стиле с остальным текстом) */
+.contact-phone-link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 20px; /* Чуть уменьшили размер, т.к. гротеск визуально шире */
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.contact-phone-link:hover,
+.contact-sans-link:hover {
+    opacity: 0.6;
+}
+
+/* Крупная почта без засечек */
+.contact-sans-link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.contact-serif-link:hover,
+.contact-sans-link:hover {
+    opacity: 0.6;
+}
+
+/* Текст адреса */
+.contact-text-large {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+.contact-sub-text {
+    font-size: 14px;
+    opacity: 0.5;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Мессенджеры */
+.contact-messengers-row {
+    display: flex;
+    gap: 30px;
+    margin-top: 5px;
+}
+
+.messenger-link {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+.contacts-light-col .messenger-link {
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+
+.messenger-link:hover {
+    opacity: 0.6;
+    border-bottom-color: transparent;
+}
+
+/* --- КАРТА --- */
+.contact-map-full {
+    width: 100%;
+    height: 500px;
+    background-color: #e5e3df;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.contact-map-full iframe {
+    width: 100%;
+    height: 100%;
     border: none;
-    filter: grayscale(100%) contrast(1.1); /* Стильная ч/б карта */
+    display: block;
+    filter: grayscale(100%) contrast(1.05);
 }
 
-/* Фирменный отступ (сдвиг вправо) для второй строки заголовков */
-.offset-line {
-    display: inline-block;
-    padding-left: 1.5em; /* Регулируй ширину отступа здесь, если захочется больше или меньше */
+/* --- АДАПТИВ --- */
+@media (max-width: 992px) {
+    .contact-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .contact-hero-image {
+        margin-left: 0;
+        max-width: 100%;
+    }
+    .contact-hero-right {
+        margin-top: 0;
+    }
+    .contacts-split-section {
+        grid-template-columns: 1fr;
+    }
+    .contacts-col {
+        padding: 80px 6vw;
+    }
 }
 
 /* --- ИДЕАЛЬНЫЕ 50/50 БЛОКИ С ЖЕСТКОЙ СЕТКОЙ И ДИНАМИКОЙ --- */

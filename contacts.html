@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>КОНТАКТЫ | АРТ КОНЦЕПТ</title>
+    <title>КОНТАКТЫ | ART CONCEPT</title>
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
     <script src="app.js" defer></script>
 </head>
-<body>
+<body style="background-color: var(--bg-light);">
 
     <!-- КАСТОМНЫЙ КУРСОР -->
     <div class="custom-cursor" id="cursor">
@@ -27,7 +27,7 @@
         </svg>
     </div>
 
-    <!-- ШАПКА ДЛЯ СВЕТЛОГО ФОНА -->
+    <!-- ШАПКА -->
     <header class="header header--light">
         <nav class="header-nav">
             <a href="portfolio.html">ПРОЕКТЫ</a>
@@ -49,41 +49,45 @@
         </div>
     </header>
 
-    <!-- КОНТАКТНЫЙ ПЕРВЫЙ ЭКРАН (ФОРМА КАК У ЕЛИСИОН) -->
+<!-- ПЕРВЫЙ ЭКРАН: ЗАГОЛОВОК, ФОТО И ФОРМА -->
     <section class="contact-hero-section">
         <div class="contact-hero-grid">
-<h1 class="contact-hero-title">
-    КАЖДЫЙ ПРОЕКТ<br>
-    <span class="offset-line">НАЧИНАЕТСЯ</span><br>
-    С&nbsp;ИСТОРИИ.<br>
-    <span class="offset-line">НАЧНЕМ ВАШУ?</span>
-</h1>
+            
+            <div class="contact-hero-left">
+                <h1 class="contact-hero-title">
+                    КАЖДЫЙ ПРОЕКТ<br>
+                    <span class="offset-line">НАЧИНАЕТСЯ</span><br>
+                    С&nbsp;ИСТОРИИ.<br>
+                    <span class="offset-line">НАЧНЕМ ВАШУ?</span>
+                </h1>
+                
+                <!-- ФОТО ДЛЯ БАЛАНСА -->
+                <div class="contact-hero-image">
+                    <img src="teaser-services-mini.jpg" alt="Интерьер ART CONCEPT">
+                </div>
+            </div>
+
             <div class="contact-hero-right">
                 <form class="footer-form contact-main-form" onsubmit="event.preventDefault();">
                     <div class="form-row">
                         <div class="input-group">
-                            <input type="text" placeholder="ИМЯ *">
+                            <input type="text" placeholder="ИМЯ *" required>
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="ФАМИЛИЯ *">
+                            <input type="tel" placeholder="ТЕЛЕФОН *" required>
                         </div>
                     </div>
                     
-                    <div class="form-row">
-                        <div class="input-group">
-                            <input type="email" placeholder="EMAIL *">
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" placeholder="ТЕЛЕФОН *">
-                        </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="EMAIL *">
                     </div>
 
                     <div class="input-group">
-                        <input type="text" placeholder="ТИП ПРОЕКТА / УСЛУГА *">
+                        <input type="text" placeholder="ТИП ОБЪЕКТА / УСЛУГА">
                     </div>
 
                     <div class="input-group">
-                        <input type="text" placeholder="ОПИСАНИЕ И ПОЖЕЛАНИЯ К ПРОЕКТУ *">
+                        <input type="text" placeholder="ОПИСАНИЕ И ПОЖЕЛАНИЯ К ПРОЕКТУ">
                     </div>
 
                     <label class="custom-checkbox-wrap">
@@ -95,63 +99,78 @@
                     <button type="submit" class="projects-link-underline footer-submit-btn">ОТПРАВИТЬ ЗАПРОС</button>
                 </form>
             </div>
+            
         </div>
     </section>
 
-<!-- СПЛИТ БЛОК С ПОЧТАМИ -->
-    <section class="contact-split-info">
-        <!-- Левая часть (Синяя) -->
-        <div class="contact-split-box blue-side">
-            <h2 class="contact-box-title">
-                ОБЩИЕ<br>ЗАПРОСЫ
-            </h2>
-            <div class="contact-info-block">
-                <span class="contact-city-label">МОСКОВСКОЕ БЮРО</span>
-                <a href="mailto:info@ac-interiors.ru">info@ac-interiors.ru</a>
-                <a href="tel:+79032986381">+7 903 298 63 81</a>
-            </div>
-            <div class="contact-info-block">
-                <span class="contact-city-label">СОТРУДНИЧЕСТВО И ВАКАНСИИ</span>
-                <a href="mailto:hr@ac-interiors.ru">hr@ac-interiors.ru</a>
+<!-- СПЛИТ 50/50: ТИПОГРАФИЧЕСКИЙ ЛЮКС -->
+    <section class="contacts-split-section">
+        
+        <!-- ЛЕВАЯ ЧАСТЬ (ТЕМНАЯ) -->
+        <div class="contacts-col contacts-dark-col">
+            <div class="contacts-col-inner">
+                <h2 class="contact-main-title">
+                    ПРЯМАЯ<br><span class="offset-line">СВЯЗЬ</span>
+                </h2>
+
+                <div class="contact-info-list">
+                    <div class="contact-item">
+                        <span class="contact-mini-label">Телефон</span>
+                        <a href="tel:+79032986381" class="contact-phone-link">+7 903 298 63 81</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-mini-label">Email</span>
+                        <a href="mailto:info@ac-interiors.ru" class="contact-sans-link">INFO@AC-INTERIORS.RU</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-mini-label">Мессенджеры</span>
+                        <div class="contact-messengers-row">
+                            <a href="https://wa.me/79032986381" target="_blank" class="messenger-link">WhatsApp ↗</a>
+                            <a href="https://t.me/artconcept" target="_blank" class="messenger-link">Telegram ↗</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-<!-- Правая часть (Бежевая) -->
-        <div class="contact-split-box beige-side">
-            <h2 class="contact-box-title">
-                ПРЕССА<br>И СМИ
-            </h2>
-            <div class="contact-info-block">
-                <span class="contact-city-label">ПУБЛИКАЦИИ И МУДБОРДЫ</span>
-                <a href="mailto:press@ac-interiors.ru">press@ac-interiors.ru</a>
-            </div>
-            <div class="press-preview-card">
-                <img src="teaser-services-mini.jpg" alt="Publication">
-            </div>
-        </div>
-        </section>
+        <!-- ПРАВАЯ ЧАСТЬ (СВЕТЛАЯ) -->
+        <div class="contacts-col contacts-light-col">
+            <div class="contacts-col-inner">
+                <h2 class="contact-main-title">
+                    ОФИС<br><span class="offset-line">И ШОУ-РУМ</span>
+                </h2>
 
-<!-- БЛОК ЛОКАЦИИ И КАРТА -->
-    <section class="contact-location-section">
-        <div class="location-text-col">
-            <h2 class="contact-box-title">
-                НАША<br><span class="offset-line">ЛОКАЦИЯ</span>
-            </h2>
-            <p class="footer-address" style="font-size: 15px; color: #444; margin-top: 3vh; line-height: 1.8;">
-                г. Москва, Большой Саввинский<br>
-                пер. 12, стр. 8 «Московский шёлк»<br>
-                (внутри шоу-рума Decorum)
-            </p>
-            <p style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 1px; color: #777; margin-top: 3vh; text-transform: uppercase;">
-                Визиты строго по предварительной записи
-            </p>
+                <div class="contact-info-list">
+                    <div class="contact-item">
+                        <span class="contact-mini-label">Адрес</span>
+                        <p class="contact-text-large">
+                            г. Москва, Большой Саввинский пер. 12, стр. 8<br>
+                            Квартал «Московский шёлк»<br>
+                            <span class="contact-sub-text">(шоу-рум Decorum)</span>
+                        </p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span class="contact-mini-label">Часы работы</span>
+                        <p class="contact-text-large">
+                            Пн — Пт: 10:00 — 19:00<br>
+                            <span class="contact-sub-text">По предварительной договоренности</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="location-map-col">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=37.568467%2C55.735072&z=16&l=map&pt=37.568467%2C55.735072,pm2rdm" width="100%" height="100%" frameborder="0"></iframe>
-        </div>
+
     </section>
 
-    <!-- ФУТЕР (ТОТ САМЫЙ СИНЬКИЙ) -->
+    <!-- ИНТЕРАКТИВНАЯ КАРТА ВО ВСЮ ШИРИНУ -->
+    <section class="contact-map-full">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=37.568467%2C55.735072&z=16&l=map&pt=37.568467%2C55.735072,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+    </section>
+
+    <!-- СИНИЙ ФУТЕР -->
     <footer class="footer-cinematic" id="footer">
         <div class="footer-grid">
             <div class="footer-form-col">
@@ -180,7 +199,7 @@
 
             <div class="footer-nav-col">
                 <div class="footer-links-group">
-                    <a href="index.html#projects">ПРОЕКТЫ</a>
+                    <a href="portfolio.html">ПРОЕКТЫ</a>
                     <a href="studio.html">БЮРО</a>
                     <a href="services.html">УСЛУГИ</a>
                     <a href="index.html#statement">ФИЛОСОФИЯ</a>

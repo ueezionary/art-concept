@@ -768,19 +768,27 @@ body.locked {
     text-transform: uppercase;
 }
 
-/* Корректировка нижней полосы под 3 элемента */
-.footer-bottom-line {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding-top: 3vh;
-    font-family: var(--font-sans); 
-    font-size: 12px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.5); 
-    text-transform: uppercase;
-}
+/* Нижняя строка (копирайт, ИП, политика) — по центру и без переносов в кашу */
+    .footer-bottom-line {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Центрируем сам flex-контейнер */
+        gap: 8px !important;
+        text-align: center !important;  /* Строго по центру */
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        opacity: 0.7 !important;
+        border: none !important; 
+        padding-top: 10px !important;
+        width: 100% !important;
+    }
+    
+    .footer-legal-inline {
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
 .footer-bottom-line a { transition: color 0.3s; }
 .footer-bottom-line a:hover { color: #FFF; }
 

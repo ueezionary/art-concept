@@ -2129,7 +2129,7 @@ p, .intro-text, .service-intro-block p {
     /* --- 2. МЕНЮ - ПО ЦЕНТРУ --- */
     .mobile-menu-overlay { 
         display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
-        background-color: #6C81A6 !important; z-index: 99999; 
+        background-color: #4d586c !important; z-index: 99999; 
         flex-direction: column; 
         justify-content: center !important; 
         align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; 

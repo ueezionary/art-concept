@@ -2049,50 +2049,44 @@ html, body, a, button, input, [role="button"] {
         display: flex !important; 
         justify-content: space-between !important; 
         align-items: center !important; 
-        padding: 40px 40px !important; /* Одинаковые отступы со всех сторон */
+        padding: 40px 40px !important; 
         width: 100% !important; 
         box-sizing: border-box !important;
-        position: fixed !important; /* Жестко фиксируем наверху */
+        position: fixed !important; 
         top: 0 !important; left: 0 !important;
         z-index: 999999 !important; 
     }
     .header-nav { display: none !important; } 
 
-/* Делаем шапку со светлым классом прозрачной (без серых дымок) */
-.header.header--light {
-    background: transparent !important;
-    background-image: none !important;
-}
-.header.header--light::after,
-.header.header--light::before {
-    display: none !important;
-}
+    /* Делаем шапку со светлым классом прозрачной */
+    .header.header--light {
+        background: transparent !important;
+        background-image: none !important;
+        padding: 40px 40px !important; 
+    }
+    .header.header--light::after,
+    .header.header--light::before {
+        display: none !important;
+    }
 
-/* Делаем шапку со светлым классом прозрачной и возвращаем нормальный отступ сверху на мобилках */
-.header.header--light {
-    background: transparent !important;
-    background-image: none !important;
-    padding: 40px 40px !important; /* Добавили отступы, как у обычной шапки */
-}
-
-/* Красим текст и логотип в черный на светлой шапке */
-.header.header--light .burger-btn::after,
-.header.header--light .header-action a,
-.header.header--light .header-nav a {
-    color: #1a1a1a !important;
-}
-.header.header--light .header-monogram path {
-    fill: #1a1a1a !important;
-}
+    /* Красим текст и логотип в черный на светлой шапке (по умолчанию) */
+    .header.header--light .burger-btn::after,
+    .header.header--light .header-action a,
+    .header.header--light .header-nav a {
+        color: #1a1a1a !important;
+    }
+    .header.header--light .header-monogram path {
+        fill: #1a1a1a !important;
+    }
 
     /* Кнопки прижимаем к краям, задаем одинаковый вес */
     .burger-btn { flex: 1 !important; display: flex !important; justify-content: flex-start !important; background: none; border: none; padding: 0 !important; margin: 0 !important; }
     .header-action { flex: 1 !important; display: flex !important; justify-content: flex-end !important; padding: 0 !important; margin: 0 !important; }
     
-    /* Логотип строго по центру (абсолютом, чтобы не зависел от длины слов по бокам) */
+    /* Логотип строго по центру */
     .header-logo-wrap { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; padding: 0 !important; margin: 0 !important; }
 
-    /* Сделали шрифты больше и тоньше */
+    /* Шрифты шапки */
     .burger-btn span { display: none !important; } 
     .burger-btn::after { content: 'МЕНЮ'; font-family: var(--font-sans); font-size: 14px !important; font-weight: 300 !important; letter-spacing: 2px !important; color: #fff !important; }
     .header-action a { font-family: var(--font-sans); font-size: 14px !important; font-weight: 300 !important; letter-spacing: 2px !important; color: #fff !important; border: none !important; text-transform: uppercase; }
@@ -2100,12 +2094,31 @@ html, body, a, button, input, [role="button"] {
     body.menu-open .burger-btn::after { content: 'ЗАКРЫТЬ' !important; border: 1px solid #fff !important; padding: 5px 12px !important; border-radius: 20px !important; font-size: 12px !important; }
     body.menu-open .header-logo-wrap, body.menu-open .header-action { opacity: 0 !important; pointer-events: none; }
 
+    /* ФИКС: Убираем любые градиенты и затемнения шапки, когда меню открыто */
+    body.menu-open .header::before,
+    body.menu-open .header::after,
+    body.menu-open .header {
+        background: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+
+    /* ФИКС: Когда меню открыто на любой странице (даже light), кнопка закрытия и логотип — строго белые */
+    body.menu-open .header .burger-btn::after,
+    body.menu-open .header.header--light .burger-btn::after {
+        color: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+    }
+    body.menu-open .header.header--light .header-monogram path {
+        fill: #FFFFFF !important;
+    }
+
     /* --- 2. МЕНЮ - ПО ЦЕНТРУ --- */
     .mobile-menu-overlay { 
         display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
         background-color: #6C81A6 !important; z-index: 99999; 
         flex-direction: column; 
-        justify-content: center !important; /* ВЕРНУЛИ СТРОГО В ЦЕНТР */
+        justify-content: center !important; 
         align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; 
         padding: 5vh 6vw !important; box-sizing: border-box !important;
     }
@@ -2113,9 +2126,17 @@ html, body, a, button, input, [role="button"] {
     
     .mobile-menu-overlay::before { content: ''; display: block; width: 65px; height: 65px; background-image: url('favicon.svg'); background-size: contain; background-repeat: no-repeat; background-position: center; margin-bottom: 5vh !important; filter: brightness(0) invert(1) !important; flex-shrink: 0; }
 
-    /* Пункты меню: крупно, тонко, близко друг к другу */
+    /* ФИКС: Пункты меню (уменьшили размер, сделали резиновым) */
     .mobile-nav { display: flex; flex-direction: column; gap: 5px !important; text-align: center; margin-bottom: 8vh !important; width: 100%; align-items: center; margin-top: 0 !important; }
-    .mobile-nav a { font-family: var(--font-serif, 'Cormorant Garamond', serif) !important; font-size: 4rem !important; font-weight: 300 !important; line-height: 1 !important; color: #FFFFFF !important; text-transform: uppercase; letter-spacing: -1px !important; }
+    .mobile-nav a { 
+        font-family: var(--font-serif, 'Cormorant Garamond', serif) !important; 
+        font-size: clamp(2.2rem, 10vw, 3.2rem) !important; 
+        font-weight: 300 !important; 
+        line-height: 1.1 !important; 
+        color: #FFFFFF !important; 
+        text-transform: uppercase; 
+        letter-spacing: -1px !important; 
+    }
 
     .mobile-menu-footer { display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 420px; margin-bottom: 40px !important; margin-top: 0 !important; }
     .mobile-col { display: flex; flex-direction: column; gap: 15px; text-align: left; }
@@ -2126,21 +2147,19 @@ html, body, a, button, input, [role="button"] {
     /* --- 3. ФИЛОСОФИЯ - СТИКИ ТЕКСТ + 4 ФОТО ПО ДЛИНЕ СКРОЛЛА --- */
     .editorial-flow-section { height: 250vh !important; display: block !important; padding: 0 !important; margin: 0 !important; position: relative !important; overflow: visible !important; }
     
-    /* Текст жестко залипает по центру экрана */
     .editorial-sticky-overlay { position: -webkit-sticky !important; position: sticky !important; top: 0 !important; height: 100vh !important; width: 100% !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; z-index: 10 !important; overflow: hidden !important; }
     
     .phrase-container { width: 90vw !important; text-align: center !important; z-index: 10 !important; }
-    .statement-row { font-size: clamp(24px, 7vw, 36px) !important; line-height: 1.3 !important; white-space: pre-wrap !important; text-align: center !important; color: #1a1a1a !important; }
     
-    /* Фотки раскиданы по контейнеру 300vh */
     .editorial-images-scatter { display: block !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; pointer-events: none !important; z-index: 1 !important; overflow: visible !important; }
     .scatter-item { position: absolute !important; display: block !important; opacity: 1 !important; visibility: visible !important; margin: 0 !important; }
     
-.scatter-item.item-1 { top: 5% !important; right: 4vw !important; left: auto !important; width: 50vw !important; aspect-ratio: 3/4 !important; }
-    .scatter-item.item-2 { top: 25% !important; left: 4vw !important; left: auto !important; width: 30vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-1 { top: 5% !important; right: 4vw !important; left: auto !important; width: 50vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-2 { top: 25% !important; left: 4vw !important; right: auto !important; width: 30vw !important; aspect-ratio: 3/4 !important; }
     .scatter-item.item-3 { top: 50% !important; right: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
-    .scatter-item.item-4 { top: 75% !important; left: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
-    .scatter-item.item-5 { top: 95% !important; left: 4vw !important; left: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-4 { top: 75% !important; left: 4vw !important; right: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
+    .scatter-item.item-5 { top: 95% !important; left: 4vw !important; right: auto !important; width: 40vw !important; aspect-ratio: 3/4 !important; }
+
     /* --- 4. БЮРО (АЛЁНА: ИДЕАЛЬНЫЙ ПОРЯДОК) --- */
     .founder-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
     
@@ -2151,15 +2170,25 @@ html, body, a, button, input, [role="button"] {
     .founder-name { order: 2 !important; font-size: 3rem !important; line-height: 1 !important; margin-bottom: 20px !important; }
     .founder-bio, .founder-text-col > p { order: 3 !important; margin-bottom: 30px !important; }
     
-    /* ФОТО СТРОГО 4-ОЕ, ПОСЛЕ БИОГРАФИИ */
     .founder-portrait-wrap { order: 4 !important; width: 100% !important; max-width: 100% !important; aspect-ratio: 4/5 !important; margin-bottom: 35px !important; }
-    
-    /* НАГРАДЫ СТРОГО 5-Е */
     .founder-awards-list { order: 5 !important; width: 100% !important; }
+
+    /* --- ФИКС ВЫЛЕЗАЮЩИХ ЗА ЭКРАН ЗАГОЛОВКОВ --- */
+    .projects-title, 
+    .intro-giant-title, 
+    .split-title, 
+    .statement-row {
+        font-size: clamp(28px, 9vw, 42px) !important; /* Резиновый размер, который не ломает экран */
+        max-width: 100% !important; 
+        word-wrap: break-word !important; 
+        overflow-wrap: break-word !important;
+        hyphens: auto !important; /* Браузер сам перенесет длинное слово */
+    }
+    .statement-row { font-size: clamp(24px, 7vw, 36px) !important; line-height: 1.3 !important; white-space: pre-wrap !important; text-align: center !important; color: #1a1a1a !important; }
 
     /* --- ОСТАЛЬНАЯ БАЗА --- */
     .service-intro-block { display: flex !important; flex-direction: column !important; padding: 120px 6vw 50px !important; gap: 20px !important; }
-    .intro-giant-title { font-size: 2.3rem !important; line-height: 1.15 !important; margin-bottom: 10px !important; }
+    .intro-giant-title { line-height: 1.15 !important; margin-bottom: 10px !important; }
     .intro-text, .service-intro-block p { display: block !important; font-size: 16px !important; line-height: 1.5 !important; color: #1a1a1a !important; margin-top: 15px !important; }
 
     .partners-header { display: flex !important; flex-direction: column !important; align-items: flex-start !important; margin-bottom: 35px !important; }
@@ -2174,6 +2203,20 @@ html, body, a, button, input, [role="button"] {
 
     .logos-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px 15px !important; width: 100% !important; }
     .partner-card { width: 100% !important; gap: 10px !important; }
+    
+    /* ФИКС: Усмиряем ПРОМОКОДЫ */
+    .partner-card p, 
+    .partner-card span, 
+    .partner-card strong, 
+    .partner-card b {
+        font-size: 11px !important; /* Уменьшили текст */
+        letter-spacing: 0.5px !important;
+    }
+    .partner-card b,
+    .partner-card strong {
+        white-space: nowrap !important; /* Запрет на разрыв самого кода */
+    }
+
     .logo-placeholder { height: 90px !important; font-size: 12px !important; }
     .split-mini-img { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 4/5 !important; margin-bottom: 30px !important; }
 
@@ -2190,95 +2233,59 @@ html, body, a, button, input, [role="button"] {
     .el-huge-img { aspect-ratio: 16/10 !important; }
     .el-side-vertical-img { aspect-ratio: 3/4 !important; }
     
-    .projects-title { font-size: 2.8rem !important; line-height: 1 !important; }
-    .split-title, .compact-title { font-size: 2.2rem !important; line-height: 1.1 !important; }
+    .projects-title { line-height: 1 !important; }
+    .split-title, .compact-title { line-height: 1.1 !important; }
 
     /* --- ИДЕАЛЬНЫЙ ФУТЕР БЕЗ МУСОРА --- */
-    .footer-cinematic {
-        padding: 50px 25px 30px !important;
-        box-sizing: border-box !important;
-    }
+    .footer-cinematic { padding: 50px 25px 30px !important; box-sizing: border-box !important; }
+    .footer-newsletter-desc { display: none !important; }
+    .footer-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; width: 100% !important; }
+    .footer-form-col { width: 100% !important; margin-bottom: 0 !important; }
 
-    /* Скрываем текст под заголовком только на мобилках */
-    .footer-newsletter-desc {
-        display: none !important;
-    }
-    
-    .footer-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 30px !important;
-        width: 100% !important;
-    }
-    
-    .footer-form-col {
-        width: 100% !important;
-        margin-bottom: 0 !important;
-    }
-
-/* 1. Делаем главный заголовок футера плотным, крупным и уверенным */
     .footer-newsletter-title {
         font-family: var(--font-serif, 'Cormorant Garamond', serif) !important;
         font-size: 2.6rem !important;
-        font-weight: 500 !important; /* Увеличили толщину, чтобы он не был хлипким */
+        font-weight: 500 !important; 
         line-height: 1.1 !important;
         text-transform: uppercase !important;
         margin-bottom: 25px !important;
         color: #FFFFFF !important;
     }
 
-    /* Навигация: убираем линии, сдвигаем две колонки ближе друг к другу */
     .footer-nav-col {
         display: flex !important;
         flex-direction: row !important;
-        justify-content: flex-start !important; /* Прижимаем к левому краю, чтобы колонки шли ближе */
-        gap: 40px !important; /* Регулируй расстояние между колонками здесь */
-        border: none !important; /* Снесли беспонтовые линии */
+        justify-content: flex-start !important; 
+        gap: 40px !important; 
+        border: none !important; 
         padding: 10px 0 !important;
         width: 100% !important;
     }
     
-    .footer-links-group {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-    }
+    .footer-links-group { display: flex !important; flex-direction: column !important; gap: 10px !important; }
     
-    .footer-links-group a {
-        font-size: 12px !important;
-        letter-spacing: 1px !important;
-        opacity: 0.9 !important;
+    .footer-links-group a,
+    .checkbox-label,
+    .footer-contact-link,
+    .footer-address,
+    .footer-bottom-line span,
+    .footer-bottom-line a {
+        font-weight: 300 !important; 
+        letter-spacing: 0.5px !important;
     }
 
-    /* Контакты */
-    .footer-contacts-col {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-        width: 100% !important;
-        margin-top: 10px !important;
-    }
-    
-    .footer-contact-link {
-        font-size: 16px !important;
-        font-weight: 400 !important;
-    }
+    .footer-links-group a { font-size: 12px !important; letter-spacing: 1px !important; opacity: 0.9 !important; }
 
-    .footer-address {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-        opacity: 0.8 !important;
-        margin-top: 5px !important;
-    }
+    .footer-contacts-col { display: flex !important; flex-direction: column !important; gap: 10px !important; width: 100% !important; margin-top: 10px !important; }
+    .footer-contact-link { font-size: 16px !important; }
+    .footer-address { font-size: 13px !important; line-height: 1.4 !important; opacity: 0.8 !important; margin-top: 5px !important; }
 
-    /* Огромный логотип внизу */
-    .footer-huge-logo {
-        margin: 30px 0 15px !important;
-        width: 100% !important;
-        border: none !important; /* Убираем линию под логотипом, если она там была */
-    }
+    .footer-form input,
+    .footer-form input::placeholder { font-weight: 300 !important; font-size: 13px !important; letter-spacing: 1px !important; }
+    .footer-submit-btn { font-weight: 400 !important; letter-spacing: 1.5px !important; }
 
-    /* Нижняя строка (копирайт, ИП, политика) — тоже без линий */
+    .footer-huge-logo { margin: 30px 0 15px !important; width: 100% !important; border: none !important; }
+
     .footer-bottom-line {
         display: flex !important;
         flex-direction: column !important;
@@ -2286,32 +2293,10 @@ html, body, a, button, input, [role="button"] {
         text-align: left !important;
         font-size: 11px !important;
         opacity: 0.7 !important;
-        border: none !important; /* Снесли последнюю линию */
+        border: none !important; 
         padding-top: 10px !important;
         width: 100% !important;
     }
     
-    .footer-legal-inline {
-        display: block !important;
-    }
-
-    /* Убираем любые градиенты и затемнения шапки, когда меню открыто */
-    body.menu-open .header::before,
-    body.menu-open .header::after,
-    body.menu-open .header {
-        background: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
-    }
-
-    /* Когда меню открыто на любой странице (даже light), кнопка закрытия и всё внутри шапки — строго белые */
-    body.menu-open .header .burger-btn::after,
-    body.menu-open .header.header--light .burger-btn::after {
-        color: #FFFFFF !important;
-        border-color: #FFFFFF !important;
-    }
-    
-    body.menu-open .header.header--light .header-monogram path {
-        fill: #FFFFFF !important;
-    }
+    .footer-legal-inline { display: block !important; }
 }

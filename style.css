@@ -2050,6 +2050,19 @@ p, .intro-text, .service-intro-block p {
     color: rgba(255, 255, 255, 1) !important;
 }
 
+
+/* --- АППАРАТНОЕ УСКОРЕНИЕ ДЛЯ АНИМИРУЕМЫХ ФОТО --- */
+.hero-image, 
+.studio-hero-bg img, 
+.compact-media img, 
+.premium-photo-reveal img {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    /* Это перекидывает рендер на видеокарту и убивает микро-дергания */
+}
+
 /* =======================================================
    12. ELICYON MOBILE LUXURY (ДО 768px) - FINAL BOSS
 ======================================================= */

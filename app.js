@@ -77,11 +77,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }}
         );
 
-        const header = document.querySelector('.header');
-        const heroImg = document.querySelector('.hero-image, .studio-hero-bg img, .compact-media img');
+const header = document.querySelector('.header');
+        // Заменяем querySelector на querySelectorAll, чтобы найти все возможные главные фото
+        const heroImgs = document.querySelectorAll('.hero-image, .studio-hero-bg img, .compact-media img');
         const mainTitles = document.querySelectorAll('.intro-giant-title, .studio-hero-title, .projects-title');
 
-        if (heroImg) gsap.from(heroImg, { scale: 1.05, duration: 1.5, ease: "power3.out", delay: 0.1 });
+        // Железобетонный fromTo вместо from — убивает дергание при загрузке
+        if (heroImgs.length > 0) {
+            gsap.fromTo(heroImgs, 
+                { scale: 1.1, transformOrigin: "center center" }, 
+                { scale: 1, duration: 1.8, ease: "power3.out", delay: 0.1 }
+            );
+        }
+        
         if (mainTitles.length > 0) gsap.from(mainTitles, { y: 20, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", delay: 0.2 });
         if (header) gsap.from(header, { y: -15, opacity: 0, duration: 1, ease: "power3.out", delay: 0.3 });
     }
@@ -320,6 +328,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (burgerBtn) {
         burgerBtn.addEventListener('click', () => {
             body.classList.toggle('menu-open');
+        });
+    }
+
+    // =======================================================
+    // 11. ЛЮКСОВОЕ ПОЯВЛЕНИЕ ПОРТРЕТОВ И АКЦЕНТНЫХ ФОТО
+    // =======================================================
+    const premiumPhotos = document.querySelectorAll('.premium-photo-reveal img');
+
+    if (premiumPhotos.length > 0) {
+        premiumPhotos.forEach(photo => {
+            gsap.fromTo(photo,
+                { 
+                    scale: 1.15, 
+                    opacity: 0 
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: photo.parentElement, // Анимация стартует по обертке
+                        start: "top 85%", // Начинается чуть раньше, чем фото появится на экране
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
         });
     }
 });

@@ -319,6 +319,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =======================================================
+   ПЕРЕКЛЮЧАТЕЛЬ СЕТКИ / СПИСКА (GRID/LIST VIEW)
+   ======================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const gridIcons = document.querySelectorAll('.grid-switcher .grid-icon');
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+
+    if (gridIcons.length === 2 && portfolioGrid) {
+        const btnGrid = gridIcons[0]; // Первая иконка (4 квадратика)
+        const btnList = gridIcons[1]; // Вторая иконка (3 полоски)
+
+        btnGrid.addEventListener('click', () => {
+            if (btnGrid.classList.contains('active')) return;
+            
+            // Меняем активный цвет у иконок
+            btnList.classList.remove('active');
+            btnGrid.classList.add('active');
+            
+            // Убираем класс списка (возвращаем сетку)
+            portfolioGrid.classList.remove('list-view');
+            
+            // Обновляем скролл для GSAP
+            setTimeout(() => ScrollTrigger.refresh(), 300);
+        });
+
+        btnList.addEventListener('click', () => {
+            if (btnList.classList.contains('active')) return;
+            
+            // Меняем активный цвет у иконок
+            btnGrid.classList.remove('active');
+            btnList.classList.add('active');
+            
+            // Добавляем класс списка
+            portfolioGrid.classList.add('list-view');
+            
+            // Обновляем скролл для GSAP
+            setTimeout(() => ScrollTrigger.refresh(), 300);
+        });
+    }
+});
+
+/* =======================================================
    БУРГЕР МЕНЮ
 ======================================================= */
 document.addEventListener('DOMContentLoaded', () => {

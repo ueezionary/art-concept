@@ -980,6 +980,57 @@ html, body, a, button, input, [role="button"] {
     mix-blend-mode: difference; /* Магическая инверсия пикселей */
 }
 
+/* --- РЕЖИМ СПИСКА ДЛЯ ПОРТФОЛИО (ИСПРАВЛЕННЫЙ ЛЮКС) --- */
+.portfolio-grid.list-view {
+    display: flex !important;
+    flex-direction: column !important; 
+    gap: 80px !important; /* Даем больше воздуха между проектами */
+}
+
+/* На компьютерах делаем вид "картинка слева, текст справа" */
+@media (min-width: 769px) {
+    .portfolio-grid.list-view .port-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 60px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .portfolio-grid.list-view .port-img-wrap {
+        width: 55% !important; /* Картинка занимает чуть больше половины экрана */
+        height: 450px !important; /* ЖЕСТКО фиксируем высоту, чтобы не было плаката */
+        margin-bottom: 0 !important;
+    }
+    
+    .portfolio-grid.list-view .port-info {
+        width: 45% !important;
+        text-align: left !important;
+    }
+}
+
+/* Заставляем картинку красиво обрезаться под новую высоту, а не сплющиваться */
+.portfolio-grid.list-view .port-img-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Визуальная активность иконок переключения */
+.grid-icon {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+.grid-icon.active {
+    opacity: 1;
+}
+
+.custom-cursor {
+    pointer-events: none !important; /* Пропускает клики сквозь курсор к кнопкам */
+}
 .custom-cursor svg {
     position: absolute; 
     top: 0; 
@@ -2333,6 +2384,8 @@ p, .intro-text, .service-intro-block p {
         visibility: hidden !important;
         pointer-events: none !important;
     }
+
+    
 
     * {
         cursor: auto !important;

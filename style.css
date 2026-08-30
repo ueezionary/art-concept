@@ -768,29 +768,6 @@ body.locked {
     text-transform: uppercase;
 }
 
-/* Нижняя строка (копирайт, ИП, политика) — по центру и без переносов в кашу */
-    .footer-bottom-line {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important; /* Центрируем сам flex-контейнер */
-        gap: 8px !important;
-        text-align: center !important;  /* Строго по центру */
-        font-size: 11px !important;
-        line-height: 1.4 !important;
-        opacity: 0.7 !important;
-        border: none !important; 
-        padding-top: 10px !important;
-        width: 100% !important;
-    }
-    
-    .footer-legal-inline {
-        display: block !important;
-        text-align: center !important;
-        width: 100% !important;
-    }
-
-.footer-bottom-line a { transition: color 0.3s; }
-.footer-bottom-line a:hover { color: #FFF; }
 
 /* ОГРОМНЫЙ ЛОГОТИП (ВЕКТОР) */
 .footer-huge-logo {
@@ -2063,7 +2040,8 @@ p, .intro-text, .service-intro-block p {
 
 .footer-bottom-line span,
 .footer-bottom-line a {
-    color: rgba(255, 255, 255, 0.4) !important; /* Тот самый приглушенный цвет для всех */
+    white-space: nowrap !important; /* Вот это не даст тексту съехать на новую строку */
+    color: rgba(255, 255, 255, 0.4) !important;
     text-decoration: none !important;
     transition: color 0.3s ease !important;
 }
@@ -2173,23 +2151,26 @@ p, .intro-text, .service-intro-block p {
         letter-spacing: -1px !important; 
     }
 
-   /* --- МЕНЮ ФУТЕР: СТРОГАЯ СЕТКА 50/50 --- */
+   /* --- МЕНЮ ФУТЕР: ЦЕНТРОВКА --- */
     .mobile-menu-footer { 
-        display: grid !important; 
-        grid-template-columns: 1fr 1fr !important; 
+        display: flex !important; 
+        flex-direction: column !important; /* Ставим в колонку */
+        align-items: center !important; /* Центрируем */
         gap: 20px !important; 
         width: 100% !important; 
-        max-width: 100% !important; 
-        margin-bottom: 40px !important; 
+        margin-bottom: 30px !important; 
         margin-top: 0 !important; 
     }
+    
     .mobile-col { 
         display: flex !important; 
         flex-direction: column !important; 
+        align-items: center !important; /* Центрируем ссылки */
+        text-align: center !important; /* Центрируем текст */
         gap: 12px !important; 
-        text-align: left !important; 
         width: 100% !important;
     }
+
     .mobile-col a { 
         font-family: var(--font-sans) !important; 
         font-size: 11px !important; 
@@ -2198,13 +2179,21 @@ p, .intro-text, .service-intro-block p {
         color: #FFFFFF !important; 
         text-transform: uppercase !important; 
         letter-spacing: 0.5px !important; 
-        border: none !important; 
-        opacity: 0.9 !important; 
-        word-wrap: break-word !important; 
-        hyphens: auto !important;
+        text-decoration: none !important; /* Убираем подчеркивание, если есть */
+        opacity: 0.6 !important; /* Делаем приглушенным, как копирайт */
     }
     
-    .mobile-copyright { font-family: var(--font-sans) !important; font-size: 10px !important; color: #FFFFFF !important; opacity: 0.6 !important; text-transform: uppercase; letter-spacing: 1px; text-align: left !important; width: 100%; max-width: 420px; margin-top: 10px !important; }
+    .mobile-copyright { 
+        font-family: var(--font-sans) !important; 
+        font-size: 10px !important; 
+        color: #FFFFFF !important; 
+        opacity: 0.6 !important; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        text-align: center !important; /* Выравнивание по центру */
+        width: 100%; 
+        margin-top: 10px !important; 
+    }
 
     /* --- 3. ФИЛОСОФИЯ - СТИКИ ТЕКСТ + 4 ФОТО ПО ДЛИНЕ СКРОЛЛА --- */
     .editorial-flow-section { height: 250vh !important; display: block !important; padding: 0 !important; margin: 0 !important; position: relative !important; overflow: visible !important; }

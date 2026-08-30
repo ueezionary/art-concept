@@ -279,7 +279,7 @@ window.addEventListener('pageshow', (event) => {
 });
 
 /* =======================================================
-   ФИЛЬТР ПРОЕКТОВ В ПОРТФОЛИО
+   ФИЛЬТР ПРОЕКТОВ В ПОРТФОЛИО (БРОНЕБОЙНЫЙ ЛЮКС)
    ======================================================= */
 document.addEventListener("DOMContentLoaded", () => {
     const filterButtons = document.querySelectorAll(".filter-btn");
@@ -287,15 +287,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (filterButtons.length > 0 && portfolioCards.length > 0) {
         
-        // Функция фильтрации
         function filterProjects(category) {
             portfolioCards.forEach(card => {
                 if (card.getAttribute("data-category") === category) {
-                    card.style.display = "block";
+                    // Удаляем inline-скрытие, передаем управление обратно в CSS (чтобы работала и сетка, и список)
+                    card.style.removeProperty('display');
+                    
+                    // Плавно проявляем отфильтрованные карточки
+                    gsap.fromTo(card, 
+                        { opacity: 0, y: 15 }, 
+                        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+                    );
                 } else {
-                    card.style.display = "none";
+                    // Прячем намертво, пробивая любые !important в CSS
+                    card.style.setProperty('display', 'none', 'important');
                 }
             });
+
+            // КРИТИЧЕСКИ ВАЖНО: Пересчитываем высоту страницы для плавного скролла
+            setTimeout(() => ScrollTrigger.refresh(), 100);
         }
 
         // При загрузке страницы находим активную кнопку и фильтруем по ней сразу
@@ -306,12 +316,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Обработка кликов по кнопкам
         filterButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                // Убираем активный класс у всех
+            button.addEventListener("click", (e) => {
+                e.preventDefault(); // На всякий случай блокируем стандартное поведение
+                
+                // Если кликнули по уже активной кнопке - ничего не делаем
+                if (button.classList.contains("active")) return;
+
+                // Переключаем активный класс
                 filterButtons.forEach(btn => btn.classList.remove("active"));
-                // Даем активный класс нажатой
                 button.classList.add("active");
-                // Фильтруем
+                
+                // Запускаем фильтр
                 filterProjects(button.getAttribute("data-filter"));
             });
         });

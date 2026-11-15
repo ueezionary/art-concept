@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>КОНТАКТЫ | ART CONCEPT</title>
-
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
@@ -27,15 +21,15 @@
         </svg>
     </div>
 
-<!-- 1. ШАПКА -->
+    <!-- 1. ШАПКА -->
     <header class="header header--light">
-        <!-- БУРГЕР ТЕПЕРЬ СТОИТ ПЕРВЫМ, ЧТОБЫ БЫТЬ СЛЕВА -->
         <button class="burger-btn"></button>
         
         <nav class="header-nav">
             <a href="portfolio.html">ПРОЕКТЫ</a>
             <a href="services.html">УСЛУГИ</a>
             <a href="studio.html">БЮРО</a>
+            <a href="articles.html">СТАТЬИ</a>
         </nav>
         
         <div class="header-logo-wrap">
@@ -57,6 +51,7 @@
             <a href="portfolio.html">Проекты</a>
             <a href="services.html">Услуги</a>
             <a href="studio.html">Бюро</a>
+            <a href="articles.html">СТАТЬИ</a>
             <a href="contacts.html">Связаться</a>
         </nav>
         <div class="mobile-menu-footer">
@@ -66,7 +61,8 @@
         </div>
         <div class="mobile-copyright">© 2026 АРТ КОНЦЕПТ. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</div>
     </div>
-<!-- ПЕРВЫЙ ЭКРАН: ЗАГОЛОВОК, ФОТО И ФОРМА -->
+
+    <!-- ПЕРВЫЙ ЭКРАН: ЗАГОЛОВОК И ФОРМА -->
     <section class="contact-hero-section">
         <div class="contact-hero-grid">
             
@@ -115,7 +111,7 @@
         </div>
     </section>
 
-<!-- СПЛИТ 50/50: ТИПОГРАФИЧЕСКИЙ ЛЮКС -->
+    <!-- СПЛИТ 50/50 -->
     <section class="contacts-split-section">
         
         <!-- ЛЕВАЯ ЧАСТЬ (ТЕМНАЯ) -->
@@ -134,14 +130,6 @@
                     <div class="contact-item">
                         <span class="contact-mini-label">Email</span>
                         <a href="mailto:info@ac-interiors.ru" class="contact-sans-link">INFO@AC-INTERIORS.RU</a>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-mini-label">Мессенджеры</span>
-                        <div class="contact-messengers-row">
-                            <a href="https://wa.me/79032986381" target="_blank" class="messenger-link">WhatsApp ↗</a>
-                            <a href="https://t.me/artconcept" target="_blank" class="messenger-link">Telegram ↗</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -182,7 +170,7 @@
         <iframe src="https://yandex.ru/map-widget/v1/?ll=37.568467%2C55.735072&z=16&l=map&pt=37.568467%2C55.735072,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
     </section>
 
-   <!-- СИНИЙ ФУТЕР -->
+    <!-- ТЕМНЫЙ ГРАФИТОВЫЙ ФУТЕР -->
     <footer class="footer-cinematic footer-dark" id="footer">
         <div class="footer-grid">
             <div class="footer-form-col">
@@ -191,10 +179,10 @@
                 <form class="footer-form" onsubmit="event.preventDefault();">
                     <div class="form-row">
                         <div class="input-group">
-                            <input type="text" placeholder="ВАШЕ ИМЯ *">
+                            <input type="text" placeholder="ВАШЕ ИМЯ *" required>
                         </div>
                         <div class="input-group">
-                            <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА *">
+                            <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА *" required>
                         </div>
                     </div>
                     <div class="input-group">
@@ -214,6 +202,7 @@
                     <a href="portfolio.html">ПРОЕКТЫ</a>
                     <a href="studio.html">БЮРО</a>
                     <a href="services.html">УСЛУГИ</a>
+                    <a href="articles.html">СТАТЬИ</a>
                     <a href="index.html#statement">ФИЛОСОФИЯ</a>
                 </div>
             </div>
@@ -255,7 +244,7 @@
 
         <div class="footer-bottom-line">
             <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ. 2026</span>
-            <span class="footer-legal-inline">ИП Волкова Елена Анатольевна &middot; ИНН 381107766007</span>
+            <span class="footer-legal-inline">ИП Чмелёва Елена Анатольевна &middot; ИНН 381107766007</span>
             <a href="privacy.html">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
         </div>
     </footer>

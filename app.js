@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Автоматически убираем висячие предлоги во всех текстах и заголовках
+    document.querySelectorAll('p, h1, h2, h3, h4, .el-meta-val').forEach(el => {
+        el.innerHTML = el.innerHTML.replace(/(^|\s)([а-яА-ЯёЁ]{1,2})\s+/g, '$1$2&nbsp;');
+    });
     
     gsap.registerPlugin(ScrollTrigger);
 
@@ -11,40 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
         smooth: true
     });
 
-    lenis.stop(); // Останавливаем скролл до конца стартовых анимаций
+    lenis.stop();
 
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    // =======================================================
-    // 2. КАСТОМНЫЙ КУРСОР
-    // =======================================================
-    const cursor = document.getElementById('cursor');
-    if (cursor) {
-        window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1, ease: "power2.out" });
-        });
-        document.addEventListener('mouseleave', () => gsap.to(cursor, { opacity: 0 }));
-        document.addEventListener('mouseenter', () => gsap.to(cursor, { opacity: 1 }));
-    }
 
-    const cursorText = document.querySelector('.cursor-text');
-    const portCards = document.querySelectorAll('.port-card');
-    if (cursorText && portCards.length > 0) {
-        portCards.forEach(card => {
-            card.addEventListener('mouseenter', () => cursorText.style.opacity = '1');
-            card.addEventListener('mouseleave', () => cursorText.style.opacity = '0');
-        });
-    }
 
     // =======================================================
-    // 3. УМНЫЙ СТАРТ (ШТОРКА НА ГЛАВНОЙ ИЛИ ПЛАВНЫЙ ВХОД НА ОСТАЛЬНЫХ)
+    // 3. УМНЫЙ СТАРТ (ПРЕЛОАДЕР НА ГЛАВНОЙ ИЛИ ПЛАВНЫЙ ВХОД)
     // =======================================================
     const preloader = document.querySelector('.preloader');
     
     if (preloader) {
-        // --- ЛОГИКА ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (С СИНЕЙ ШТОРКОЙ) ---
         gsap.set(".header", { y: -20, opacity: 0 });
         gsap.set("#line-group", { scaleX: 0, opacity: 0, transformOrigin: "center center" });
         gsap.set("#art-word", { x: 30, opacity: 0 });
@@ -68,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .to("#line-group", { scaleX: 1, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.6");
 
     } else {
-        // --- ЛОГИКА ДЛЯ ОСТАЛЬНЫХ СТРАНИЦ (ЗАЩИТА ОТ МОРГАНИЯ) ---
         gsap.fromTo(document.body, 
             { opacity: 0 }, 
             { opacity: 1, duration: 0.6, ease: "power2.inOut", onComplete: () => {
@@ -77,12 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }}
         );
 
-const header = document.querySelector('.header');
-        // Заменяем querySelector на querySelectorAll, чтобы найти все возможные главные фото
-        const heroImgs = document.querySelectorAll('.hero-image, .studio-hero-bg img, .compact-media img');
-        const mainTitles = document.querySelectorAll('.intro-giant-title, .studio-hero-title, .projects-title');
+        const header = document.querySelector('.header');
+        const heroImgs = document.querySelectorAll('.hero-image, .studio-hero-bg img, .compact-media img, .el-hero-bg img');
+        const mainTitles = document.querySelectorAll('.intro-giant-title, .studio-hero-title, .projects-title, .el-project-title');
 
-        // Железобетонный fromTo вместо from — убивает дергание при загрузке
         if (heroImgs.length > 0) {
             gsap.fromTo(heroImgs, 
                 { scale: 1.1, transformOrigin: "center center" }, 
@@ -166,17 +148,13 @@ const header = document.querySelector('.header');
         });
     }
 
-   // =======================================================
-    // 7. ЛЮКСОВАЯ АНИМАЦИЯ СПЛИТ-ЭКРАНОВ И УСЛУГ
+    // =======================================================
+    // 7. АНИМАЦИЯ СПЛИТ-ЭКРАНОВ И УСЛУГ
     // =======================================================
     const splitSections = document.querySelectorAll('.split-teaser, .service-compact-section');
-
     if (splitSections.length > 0) {
         splitSections.forEach((section) => {
-            // Ищем все картинки внутри секции (и большую, и маленькую в тексте)
             const imgs = section.querySelectorAll('.split-image-col img, .split-img img, .compact-media img');
-            
-            // Ищем текстовый контейнер
             const contentContainer = section.querySelector('.split-text-col, .compact-content');
             const contentElems = contentContainer ? contentContainer.children : null;
 
@@ -188,7 +166,6 @@ const header = document.querySelector('.header');
                 }
             });
 
-            // 1. Плавный зум картинок
             if (imgs.length > 0) {
                 tl.fromTo(imgs, 
                     { scale: 1.12, opacity: 0 }, 
@@ -197,7 +174,6 @@ const header = document.querySelector('.header');
                 );
             }
 
-            // 2. Плавный каскадный подъем текстов, заголовка и ссылок
             if (contentElems && contentElems.length > 0) {
                 tl.fromTo(contentElems, 
                     { y: 30, opacity: 0 }, 
@@ -240,22 +216,104 @@ const header = document.querySelector('.header');
     }
 
     // =======================================================
-    // 10. БЕСШОВНЫЙ ВЫХОД (ПЛАВНОЕ РАСТВОРЕНИЕ ПРИ КЛИКЕ)
+    // 10. ФИЛЬТР ПРОЕКТОВ И ПЕРЕКЛЮЧАТЕЛЬ СЕТКА/СПИСОК
+    // =======================================================
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const portfolioCards = document.querySelectorAll(".port-card");
+
+    if (filterButtons.length > 0 && portfolioCards.length > 0) {
+        function filterProjects(category) {
+            portfolioCards.forEach(card => {
+                if (card.getAttribute("data-category") === category) {
+                    card.style.removeProperty('display');
+                    gsap.fromTo(card, 
+                        { opacity: 0, y: 15 }, 
+                        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+                    );
+                } else {
+                    card.style.setProperty('display', 'none', 'important');
+                }
+            });
+            setTimeout(() => ScrollTrigger.refresh(), 100);
+        }
+
+        const activeButton = document.querySelector(".filter-btn.active");
+        if (activeButton) {
+            filterProjects(activeButton.getAttribute("data-filter"));
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                if (button.classList.contains("active")) return;
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+                filterProjects(button.getAttribute("data-filter"));
+            });
+        });
+    }
+
+    const gridIcons = document.querySelectorAll('.grid-switcher .grid-icon');
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+
+    if (gridIcons.length === 2 && portfolioGrid) {
+        const btnGrid = gridIcons[0];
+        const btnList = gridIcons[1];
+
+        btnGrid.addEventListener('click', () => {
+            if (btnGrid.classList.contains('active')) return;
+            btnList.classList.remove('active');
+            btnGrid.classList.add('active');
+            portfolioGrid.classList.remove('list-view');
+            setTimeout(() => ScrollTrigger.refresh(), 300);
+        });
+
+        btnList.addEventListener('click', () => {
+            if (btnList.classList.contains('active')) return;
+            btnGrid.classList.remove('active');
+            btnList.classList.add('active');
+            portfolioGrid.classList.add('list-view');
+            setTimeout(() => ScrollTrigger.refresh(), 300);
+        });
+    }
+
+    // =======================================================
+    // 11. БУРГЕР МЕНЮ И ПОЯВЛЕНИЕ ПОРТРЕТОВ
+    // =======================================================
+    const burgerBtn = document.querySelector('.burger-btn');
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', () => {
+            document.body.classList.toggle('menu-open');
+        });
+    }
+
+    const premiumPhotos = document.querySelectorAll('.premium-photo-reveal img');
+    if (premiumPhotos.length > 0) {
+        premiumPhotos.forEach(photo => {
+            gsap.fromTo(photo,
+                { scale: 1.15, opacity: 0 },
+                {
+                    scale: 1, opacity: 1, duration: 1.8, ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: photo.parentElement,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    }
+
+    // =======================================================
+    // 12. БЕСШОВНЫЙ ПЕРЕХОД МЕЖДУ СТРАНИЦАМИ
     // =======================================================
     const internalLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([href^="#"])');
-
     internalLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const destination = link.getAttribute('href');
-            
-            // Если ссылка пустая или это та же страница - игнорируем
             if (!destination || destination === '') return;
-            
             e.preventDefault();
-            
-            if (lenis) lenis.stop(); // Блокируем скролл
-
-            // Плавно растворяем всю страницу целиком
+            if (lenis) lenis.stop();
             gsap.to(document.body, {
                 opacity: 0,
                 duration: 0.4,
@@ -267,150 +325,11 @@ const header = document.querySelector('.header');
         });
     });
 
-}); // ЗАКРЫВАЕМ DOMContentLoaded ЗДЕСЬ!
+});
 
-// =======================================================
-// 11. ВОССТАНОВЛЕНИЕ ПРОЗРАЧНОСТИ ДЛЯ SAFARI (Кнопка "Назад")
-// =======================================================
+// Восстановление прозрачности для Safari (Кнопка "Назад")
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         gsap.set(document.body, { opacity: 1 });
-    }
-});
-
-/* =======================================================
-   ФИЛЬТР ПРОЕКТОВ В ПОРТФОЛИО (БРОНЕБОЙНЫЙ ЛЮКС)
-   ======================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const portfolioCards = document.querySelectorAll(".port-card");
-
-    if (filterButtons.length > 0 && portfolioCards.length > 0) {
-        
-        function filterProjects(category) {
-            portfolioCards.forEach(card => {
-                if (card.getAttribute("data-category") === category) {
-                    // Удаляем inline-скрытие, передаем управление обратно в CSS (чтобы работала и сетка, и список)
-                    card.style.removeProperty('display');
-                    
-                    // Плавно проявляем отфильтрованные карточки
-                    gsap.fromTo(card, 
-                        { opacity: 0, y: 15 }, 
-                        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-                    );
-                } else {
-                    // Прячем намертво, пробивая любые !important в CSS
-                    card.style.setProperty('display', 'none', 'important');
-                }
-            });
-
-            // КРИТИЧЕСКИ ВАЖНО: Пересчитываем высоту страницы для плавного скролла
-            setTimeout(() => ScrollTrigger.refresh(), 100);
-        }
-
-        // При загрузке страницы находим активную кнопку и фильтруем по ней сразу
-        const activeButton = document.querySelector(".filter-btn.active");
-        if (activeButton) {
-            filterProjects(activeButton.getAttribute("data-filter"));
-        }
-
-        // Обработка кликов по кнопкам
-        filterButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
-                e.preventDefault(); // На всякий случай блокируем стандартное поведение
-                
-                // Если кликнули по уже активной кнопке - ничего не делаем
-                if (button.classList.contains("active")) return;
-
-                // Переключаем активный класс
-                filterButtons.forEach(btn => btn.classList.remove("active"));
-                button.classList.add("active");
-                
-                // Запускаем фильтр
-                filterProjects(button.getAttribute("data-filter"));
-            });
-        });
-    }
-});
-
-/* =======================================================
-   ПЕРЕКЛЮЧАТЕЛЬ СЕТКИ / СПИСКА (GRID/LIST VIEW)
-   ======================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-    const gridIcons = document.querySelectorAll('.grid-switcher .grid-icon');
-    const portfolioGrid = document.querySelector('.portfolio-grid');
-
-    if (gridIcons.length === 2 && portfolioGrid) {
-        const btnGrid = gridIcons[0]; // Первая иконка (4 квадратика)
-        const btnList = gridIcons[1]; // Вторая иконка (3 полоски)
-
-        btnGrid.addEventListener('click', () => {
-            if (btnGrid.classList.contains('active')) return;
-            
-            // Меняем активный цвет у иконок
-            btnList.classList.remove('active');
-            btnGrid.classList.add('active');
-            
-            // Убираем класс списка (возвращаем сетку)
-            portfolioGrid.classList.remove('list-view');
-            
-            // Обновляем скролл для GSAP
-            setTimeout(() => ScrollTrigger.refresh(), 300);
-        });
-
-        btnList.addEventListener('click', () => {
-            if (btnList.classList.contains('active')) return;
-            
-            // Меняем активный цвет у иконок
-            btnGrid.classList.remove('active');
-            btnList.classList.add('active');
-            
-            // Добавляем класс списка
-            portfolioGrid.classList.add('list-view');
-            
-            // Обновляем скролл для GSAP
-            setTimeout(() => ScrollTrigger.refresh(), 300);
-        });
-    }
-});
-
-/* =======================================================
-   БУРГЕР МЕНЮ
-======================================================= */
-document.addEventListener('DOMContentLoaded', () => {
-    const burgerBtn = document.querySelector('.burger-btn');
-    const body = document.body;
-
-    if (burgerBtn) {
-        burgerBtn.addEventListener('click', () => {
-            body.classList.toggle('menu-open');
-        });
-    }
-
-    // =======================================================
-    // 11. ЛЮКСОВОЕ ПОЯВЛЕНИЕ ПОРТРЕТОВ И АКЦЕНТНЫХ ФОТО
-    // =======================================================
-    const premiumPhotos = document.querySelectorAll('.premium-photo-reveal img');
-
-    if (premiumPhotos.length > 0) {
-        premiumPhotos.forEach(photo => {
-            gsap.fromTo(photo,
-                { 
-                    scale: 1.15, 
-                    opacity: 0 
-                },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 1.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: photo.parentElement, // Анимация стартует по обертке
-                        start: "top 85%", // Начинается чуть раньше, чем фото появится на экране
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
     }
 });

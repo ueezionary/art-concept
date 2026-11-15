@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>АРТ КОНЦЕПТ | Архитектурное бюро</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
@@ -21,13 +17,12 @@
     <!-- КАСТОМНЫЙ КУРСОР -->
     <div class="custom-cursor" id="cursor">
         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Строгая, острая геометрия -->
             <path d="M0 0 L15 5 L8 8 L5 15 Z" />
         </svg>
     </div>
 
-    <!-- 0. ПРЕЛОАДЕР (КЛАССИКА С ЗАНАВЕСОМ) -->
-<div class="preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color:#4d586c; z-index: 999999; display: flex; justify-content: center; align-items: center;">
+    <!-- 0. ПРЕЛОАДЕР -->
+    <div class="preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color:#1A1A1A; z-index: 999999; display: flex; justify-content: center; align-items: center;">
         <div class="preloader-logo-wrap">
             <svg class="preloader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 297.6 265.7">
                 <path fill="#FFFFFF" d="M100,151.1c-.5-8.1-7.2-14.5-15.4-14.5v-2.4h107.8l20.8,60.9h28.7L175.4,3.6h-52.4L57.2,195.2h27.8l15-44.1ZM141.6,22.1h14.6c8.9,32.6,19.7,62.2,29.8,91.7h-74c9.9-29.5,20.9-59.1,29.5-91.7Z"/>
@@ -36,15 +31,15 @@
         </div>
     </div>
 
-<!-- 1. ШАПКА -->
+    <!-- 1. ШАПКА -->
     <header class="header">
-        <!-- БУРГЕР ТЕПЕРЬ СТОИТ ПЕРВЫМ, ЧТОБЫ БЫТЬ СЛЕВА -->
         <button class="burger-btn"></button>
         
         <nav class="header-nav">
             <a href="portfolio.html">ПРОЕКТЫ</a>
             <a href="services.html">УСЛУГИ</a>
             <a href="studio.html">БЮРО</a>
+            <a href="articles.html">СТАТЬИ</a>
         </nav>
         
         <div class="header-logo-wrap">
@@ -66,6 +61,7 @@
             <a href="portfolio.html">Проекты</a>
             <a href="services.html">Услуги</a>
             <a href="studio.html">Бюро</a>
+            <a href="articles.html">Статьи</a>
             <a href="contacts.html">Связаться</a>
         </nav>
         <div class="mobile-menu-footer">
@@ -134,20 +130,18 @@
         </div>
     </section>
 
-    <!-- 4. ПРОЕКТЫ: ТРЕХЧАСТНАЯ КОМПОЗИЦИЯ ELICYON -->
+    <!-- 4. ПРОЕКТЫ -->
     <section class="projects-wide" id="projects">
         <div class="projects-grid-layout">
             
-            <!-- Левая колонка (прижата к верху) -->
             <div class="projects-col-left fade-up">
                 <h2 class="projects-title">
                     <span class="title-line-1">НАШИ</span>
                     <span class="title-line-2">ПРОЕКТЫ</span>
                 </h2>
-               <p class="projects-desc">Мы создаем только самые продуманные и&nbsp;визионерские интерьеры, охватывая жилые, инвестиционные и&nbsp;коммерческие пространства.</p>
+                <p class="projects-desc">Мы создаем только самые продуманные и&nbsp;визионерские интерьеры, охватывая жилые, инвестиционные и&nbsp;коммерческие пространства.</p>
             </div>
             
-            <!-- Центральная колонка: 3 ступенчатых прямоугольника -->
             <div class="projects-visuals-center fade-up">
                 <a href="portfolio.html" class="proj-card card-1">
                     <img src="project-1.jpg" alt="Жилые">
@@ -166,7 +160,6 @@
                 </a>
             </div>
 
-            <!-- Правая колонка (прижата к низу) -->
             <div class="projects-col-right fade-up">
                 <p class="projects-desc">Каждый объект определяется не&nbsp;мимолетным трендом, а&nbsp;выверенной эстетикой, контекстом и&nbsp;бескомпромиссным качеством.</p>
                 <a href="portfolio.html" class="projects-link-underline">СМОТРЕТЬ ВСЕ ПРОЕКТЫ</a>
@@ -175,12 +168,10 @@
         </div>
     </section>
 
-<!-- ТИЗЕР УСЛУГ (Сплит 50/50) -->
+    <!-- 5. ТИЗЕР УСЛУГ -->
     <section class="split-teaser" id="services">
         <div class="split-image-col">
             <img src="teaser-services-big.jpg" alt="Дизайн интерьера">
-            
-            <!-- Плашка для первой секции -->
             <a href="portfolio.html" class="split-caption">
                 <span class="caption-label">ПРОЕКТ</span>
                 <span class="caption-value">АПАРТАМЕНТЫ В СИТИ <span class="caption-arrow">&rarr;</span></span>
@@ -196,12 +187,10 @@
         </div>
     </section>
 
-    <!-- ТИЗЕР БЮРО (Реверс 50/50) -->
+    <!-- 6. ТИЗЕР БЮРО -->
     <section class="split-teaser reverse" id="studio">
         <div class="split-image-col">
-            <img src="teaser-studio.jpg" alt="Алёна Волкова">
-            
-            <!-- Плашка для второй секции -->
+            <img src="teaser-studio.jpg" alt="Интерьер бюро">
             <a href="portfolio.html" class="split-caption">
                 <span class="caption-label">ПРОЕКТ</span>
                 <span class="caption-value">РЕЗИДЕНЦИЯ В МОСКВЕ <span class="caption-arrow">&rarr;</span></span>
@@ -217,11 +206,10 @@
         </div>
     </section>
 
-   <!-- 8. СИНИЙ ИНТЕРАКТИВНЫЙ ФУТЕР -->
-    <footer class="footer-cinematic" id="footer">
+    <!-- 7. ТЕМНЫЙ ГРАФИТОВЫЙ ФУТЕР -->
+    <footer class="footer-cinematic footer-dark" id="footer">
         <div class="footer-grid">
             
-            <!-- Колонка 1: Форма заявки -->
             <div class="footer-form-col">
                 <h2 class="footer-newsletter-title">ОБСУДИТЬ ПРОЕКТ</h2>
                 <p class="footer-newsletter-desc">Оставьте свои пожелания о вашем пространстве, а остальное сделаем мы.</p>
@@ -229,10 +217,10 @@
                 <form class="footer-form" onsubmit="event.preventDefault();">
                     <div class="form-row">
                         <div class="input-group">
-                            <input type="text" placeholder="ВАШЕ ИМЯ *">
+                            <input type="text" placeholder="ВАШЕ ИМЯ *" required>
                         </div>
                         <div class="input-group">
-                            <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА *">
+                            <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА *" required>
                         </div>
                     </div>
 
@@ -250,16 +238,16 @@
                 </form>
             </div>
 
-            <!-- Колонка 2: Навигация -->
             <div class="footer-nav-col">
                 <div class="footer-links-group">
                     <a href="portfolio.html">ПРОЕКТЫ</a>
                     <a href="studio.html">БЮРО</a>
                     <a href="services.html">УСЛУГИ</a>
+                    <a href="index.html#statement">ФИЛОСОФИЯ</a>
+                    <a href="articles.html">СТАТЬИ</a>
                 </div>
             </div>
 
-            <!-- Колонка 3: Контакты (Без ИП) -->
             <div class="footer-contacts-col">
                 <a href="tel:+79032986381" class="footer-contact-link">+7 903 298 63 81</a>
                 <a href="mailto:info@ac-interiors.ru" class="footer-contact-link">info@ac-interiors.ru</a>
@@ -273,7 +261,6 @@
 
         </div>
 
-        <!-- ОГРОМНЫЙ ЛОГОТИП С ПАЛКОЙ -->
         <div class="footer-huge-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 726 73.3">
                 <g id="line-group">
@@ -298,7 +285,6 @@
             </svg>
         </div>
 
-        <!-- Нижняя строка: слева права, по центру ИП, справа политика -->
         <div class="footer-bottom-line">
             <span>ВСЕ ПРАВА ЗАЩИЩЕНЫ. 2026</span>
             <span class="footer-legal-inline">ИП Чмелёва Елена Анатольевна &middot; ИНН 381107766007</span>
